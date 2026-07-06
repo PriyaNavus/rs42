@@ -1,18 +1,53 @@
 % ============================================================
 % waypoints.lp
-% Required intermediate waypoint constraints
+% Station-based waypoint constraints
 % ============================================================
 
-waypoint(0, wp1, 24, 14).
-waypoint(0, wp2, 24, 18).
+station(s1, 0, wp9).
+station(s2, 0, wp13).
 
-waypoint_order(0, wp1, wp2).
+must_visit(0, s1).
+must_visit(0, s2).
 
-visited_waypoint(ID, WP) :-
+station(s2, 1, wp2).
+must_visit(1, s2).
+
+station_order(0, s1, s2).
+
+required_waypoint(ID, WP) :-
+    must_visit(ID, Station),
+    station(Station, ID, WP).
+
+waypoint(ID, WP, X, Y) :-
+    required_waypoint(ID, WP),
+    flatland_waypoint(ID, WP, X, Y).
+
+visited_station(ID, Station) :-
+    station(Station, ID, WP),
     waypoint(ID, WP, X, Y),
     pos(ID, X, Y, _, T).
 
-:- waypoint(ID, WP, _, _),
-   not visited_waypoint(ID, WP).
+visited_station_at(ID, Station, T) :-
+    station(Station, ID, WP),
+    waypoint(ID, WP, X, Y),
+    pos(ID, X, Y, _, T).
 
-#show visited_waypoint/2.
+first_station_visit(ID, Station, T) :-
+    visited_station_at(ID, Station, T),
+    not earlier_station_visit(ID, Station, T).
+
+earlier_station_visit(ID, Station, T) :-
+    visited_station_at(ID, Station, T),
+    visited_station_at(ID, Station, T1),
+    T1 < T.
+
+:- must_visit(ID, Station),
+   not visited_station(ID, Station).
+
+:- station_order(ID, S1, S2),
+   first_station_visit(ID, S1, T1),
+   first_station_visit(ID, S2, T2),
+   T1 >= T2.
+
+#show visited_station/2.
+#show first_station_visit/3.

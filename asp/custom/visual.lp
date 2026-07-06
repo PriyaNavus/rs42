@@ -3,10 +3,7 @@
 % Preference optimization with waypoint/intermediate-stop support
 % ============================================================
 
-#const w_arrival = 10.
-#const w_wait = 5.
-#const w_waypoint = 0.
-#const w_turn = 2.
+
 
 % -----------------------------
 % Arrival time
@@ -96,6 +93,10 @@ cost(ID,waypoint,C) :-
 cost(ID,turns,C) :-
     turns(ID,T),
     C = T * w_turn.
+
+cost(P,transfer,C) :-
+    transfer_count(P,N),
+    C = N * w_transfer.
 
 #minimize { C,ID,Type : cost(ID,Type,C) }.
 

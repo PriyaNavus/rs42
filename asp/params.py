@@ -7,7 +7,9 @@
 primary = [
     "asp/custom/connection.lp",
     "asp/custom/encoding.lp",
+    "asp/custom/generated_waypoints.lp",
     "asp/custom/waypoint.lp",
+    "asp/custom/passenger_transfer.lp",
     "asp/custom/visual.lp"
 ]
 

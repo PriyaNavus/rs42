@@ -10,7 +10,8 @@ primary = [
     "asp/custom/generated_waypoints.lp",
     "asp/custom/waypoint.lp",
     "asp/custom/passenger_transfer.lp",
-    "asp/custom/visual.lp"
+    "asp/custom/visual.lp",
+    "asp/profiles/active_profile.lp"
 ]
 
 secondary = []

@@ -25,8 +25,11 @@ waiting_time(ID,N) :-
     train(ID),
     N = #count {
         T : action(train(ID), wait, T),
+            pos(ID,_,_,_,T),
             not reached(ID,T)
     }.
+% pos(...) filters out the forced pre spawn waits (the train is not on
+% the map yet, that waiting is flatland mechanics, not inconvenience)
 
 % -----------------------------
 % Turns / route complexity

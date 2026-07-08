@@ -1,6 +1,6 @@
 # group rs42 - passenger convenience planner
 
-team: priya and orkan. course: railway scheduling with flatland and asp, supervised by kep.
+team: priya and orkan. course: railway scheduling with flatland and asp, supervised by r. kepler james murphy.
 
 this file documents our own work. the original toolkit readme from the krr-up/flatland repo is kept unchanged next to it, see README.md for build and solve basics.
 
@@ -52,7 +52,7 @@ important: this replaces the older run_preference.py approach. run_preference.py
 the ui has two solve modes:
 
 - quick check: runs plain clingo on the lp environment, shows the optimization value, the metrics (arrival, waiting, turns, transfers, costs) and the schedule. works today.
-- full animation: runs solve.py on the pkl environment. this needs kep's announced solver update that accepts output from optimized programs. until that update lands, use the quick check.
+- full animation: runs solve.py on the pkl environment and displays the resulting gif in the browser.
 
 ## how to run
 
@@ -74,21 +74,25 @@ verified working: this exact call finds the optimum on env_001--2_4 including a 
 - no malfunctions, we define our own solvable environments
 - replay convention 1, spawning: a train with start time n is off the map until n+2. the encoding forces wait actions for 0..n, the spawning move_forward at n+1, and puts the train on its start cell at n+2 (same as the krr-up reference). planning as if the train was on the map at n desyncs plan and simulation
 - replay convention 2, steering labels: flatland reads move_left and move_right relative to the direction the train is facing in its current cell. the encoding chooses the route internally (steer/3) and derives the labels from consecutive movement directions. deriving labels from the edge letters directly emits turns one step early, flatland then ignores them at switches and trains deadlock (we hit exactly this, verified via output paths.csv)
-- solve.py executes the model list built in modules/actionlist.py. with '#minimize' the optimum is the last yielded model, so actionlist.py uses models[-1]. the original used models[0], the first and worst model. this local fix overlaps with kep's announced solver update, watch for conflicts when his update lands
-- stops are built manually in v3. the v4 waypoint format 'waypoint(z, ord, (x,y), dir, arr, dep)' was announced by kep and is subject to change, our station representation mirrors its fields (order, location, direction, time window) to ease a later migration
+- solve.py executes the model list built in modules/actionlist.py. with '#minimize' the optimum is the last yielded model, so actionlist.py uses models[-1]. the original used models[0], the first and worst model. this local fix overlaps with an announced official toolkit update for optimized programs, reconcile when it lands
+- stops are built manually in v3. the v4 waypoint format 'waypoint(z, ord, (x,y), dir, arr, dep)' has been announced for the course toolkit and is subject to change, our station representation mirrors its fields (order, location, direction, time window) to ease a later migration
 - adjustable values sit on top of files as '#const' so they are easy to tune
 
 ## open points and future work
 
-- transfer waiting time: kep's guideline is that six minutes is the optimal transfer waiting time and deviation in either direction is bad. the current cost layer minimizes waiting toward zero. a follow up is to penalize the deviation from the optimum instead, for example deviation = |wait - opt_wait| with '#const opt_wait' on top
+- transfer waiting time: following our supervisor's guidance, six minutes is treated as the optimal transfer waiting time, and deviation in either direction is penalized. the current cost layer minimizes waiting toward zero. a follow up is to penalize the deviation from the optimum instead, for example deviation = |wait - opt_wait| with '#const opt_wait' on top
 - crowding as a criterion is not modelled yet
-- animation with optimized programs works via our local actionlist.py fix (models[-1]). when kep ships his official solver update, compare and reconcile
+- animation with optimized programs works via our local actionlist.py fix (models[-1]). when the official toolkit update for optimized programs is released, compare and reconcile
 
 ## related work and how we position ourselves
 
-we build on existing techniques and cite them rather than copy them. main references:
+our approach builds on established techniques from the literature. main references:
 
-- p. vansteenwegen and d. van oudheusden, 'decreasing the passenger waiting time for an intercity rail network', transportation research part b 41 (2007). recommended by kep. minimizes a weighted waiting cost function on the belgian intercity network, closest published relative of our cost function idea
+- p. vansteenwegen and d. van oudheusden, 'decreasing the passenger waiting time for an intercity rail network', transportation research part b 41 (2007). recommended by our supervisor. minimizes a weighted waiting cost function on the belgian intercity network, closest published relative of our cost function idea
 - j. goetsch and i. seidl, 'prioritization', university of potsdam student report. same asp machinery we reuse: '#minimize', weights, the times 1000 integer trick for ratios, and the lesson that weighted sums beat strict priorities
 - g. brewka, j. delgrande, j. romero and t. schaub, 'asprin: customizing answer set preferences without a headache', aaai 2015. javier romero's work on preference handling in asp is the general framework our hand built weighted approach relates to, check his further papers on preferences for the report
-- for the exploratory research phase, search google scholar (labs) for the topic (passenger waiting times) combined with the coordinating fields kep listed: multi agent pathfinding (mapf), logic programming, linear programming and milp, boolean satisfiability (sat), constraint programming. also check the railway-research repository, especially the future work sections, research max age 2022
+- our literature research focuses on publications from 2022 onwards where possible, in line with the course guidance. older foundational works are included where they are directly relevant to our approach. we search google scholar (including the scholar labs feature) by combining our topic, passenger waiting times and ride convenience, with the coordinating fields of the course: multi agent pathfinding (mapf), logic programming, linear programming and milp, boolean satisfiability (sat), and constraint programming. the railway-research repository, in particular the future work sections of previous student projects, serves as an additional starting point
+
+## acknowledgements
+
+we thank r. kepler james murphy for the supervision and guidance throughout this project, in particular for helping us refine our concept, the literature recommendations and the toolkit support.

@@ -1,154 +1,107 @@
-# KRR-Flatland
+# RS42 — Passenger Convenience Planning in Flatland
 
-![Flatland animation](https://i.imgur.com/9cNtWjs.gif)
+This repository plans conflict-free train schedules in the [Flatland](https://flatland.aicrowd.com/intro.html) railway simulation using Answer Set Programming (ASP), and extends the planning with a passenger perspective: journeys are scored on convenience criteria (arrival time, waiting, transfers, turns, intermediate stops), each weighted by a user-selected preference profile. The solver then returns the most convenient schedule instead of an arbitrary valid one.
 
-## Background
-Flatland is a [railway scheduling challenge](https://flatland.aicrowd.com/intro.html) hosted by AICrowd that seeks to solve the problem of multi-agent pathfinding for trains in large railway networks.  Although approaches across all domains (e.g. reinforcement learning, operations research) are welcome, this repository focuses on integrating ASP-based solutions within the Flatland framework.
-
-Since the Flatland framework was initially written in Python, a pipeline for:
-- reading in and interpreting Flatland environments
-- converting ASP output to a visualization-compatible format
-
-is necessary to integrate Python and ASP.
-
-<br>
+The repository builds on the [krr-up/flatland](https://github.com/krr-up/flatland) toolkit, which bridges Python and clingo: it reads Flatland environments, converts them to logical facts, and replays ASP output as an animated simulation.
 
 ## Repository structure
 
-- 📁 `asp` which contains ASP encodings that can be used to handle path generation in Flatland
-- 📁 `doc` which contains thorough documentation about the framework
-- 📁 `envs` which contains pre-fabricated Flatland environments for development and testing
-- 📁 `modules` which contains scripts that assist in bridging the gap between Python and clingo
-- 📁 `output` which contains animated visualizations and performance statistics from generated paths
-- 📝 `build.py` which is used to build user-specified environments
-- 📝 `solve.py` which is used to ground and solve encodings, and produce an animated visualization of the resulting paths
+- `asp/custom/` — the RS42 encoding stack (see Encodings below)
+- `asp/profiles/` — preference profiles as weight constants; `active_profile.lp` is written by the UI
+- `asp/params.py` — controls which encodings the solver loads (`primary` list)
+- `ui/` — Streamlit web interface
+- `tools/` — helper scripts, e.g. waypoint extraction from Flatland environments
+- `envs/` — pre-built environments; `envs/params.py` controls environment generation
+- `modules/` — Python–clingo bridge (fact conversion, action list, simulation manager)
+- `doc/` — original toolkit documentation
+- `output/` — animations and per-step logs (`paths.csv`) from simulation runs
+- `build.py` — builds environments from `envs/params.py`
+- `solve.py` — solves an environment and renders the resulting schedule as a GIF
 
-<br>
+## Installation
 
-## Getting started
+A conda environment with Python 3.10 is recommended; newer Python versions conflict with Flatland 3 dependencies.
 
-### Prerequisites
-
-In accordance with the Flatland competition, it is recommended to install [Anaconda](https://www.anaconda.com/distribution/) and create a new conda environment:
 ```
-conda create python=3.7 --name flatland
+conda create -n flatland python=3.10
 conda activate flatland
+pip install "flatland-rl<4" imageio clingo "importlib_resources>=5,<6"
+conda install -c conda-forge streamlit
 ```
 
-📦 Then, install the stable release of Flatland:
-```
-pip install flatland-rl
-```
+Notes:
+- The version pin `flatland-rl<4` matters: the environments in `envs/pkl/` were built with Flatland v3 and cannot be loaded by a v4 installation.
+- On macOS, installing Streamlit via conda-forge avoids a pyarrow build error that plain pip can run into.
+- `importlib_resources>=5,<6` resolves a `typing.io` import error on recent Python versions.
 
-📦 To have access to clingo, install the required package:
-```
-conda install -c potassco clingo
-```
+## Usage
 
-<br>
+### Web interface
 
-### Installation
+From the repository root:
 
-Clone the repository with the following command to save the framework locally:
 ```
-git clone https://github.com/krr-up/flatland.git
+streamlit run ui/app.py
 ```
 
-## Using the framework
+The UI lets the user pick a preference profile (fastest, least waiting, fewest transfers, balanced, comfort) or set custom weights with sliders. It writes the chosen weights to `asp/profiles/active_profile.lp`, which is loaded via `asp/params.py`, so the selection reaches the solver. Two modes are available:
 
-From the command line, `cd` into `/flatland`.
+- Quick check: runs clingo on the `.lp` environment and reports the optimization value, per-train metrics, and the schedule.
+- Full animation: runs `solve.py` on the `.pkl` environment and displays the resulting GIF.
 
-### 🗺️ Creating environments
+### Creating environments
 
-Environments can be created and stored for later use.  There is no limit to how many times a simulation may be performed on a single environment.
+Adjust `envs/params.py` (grid size, number of agents, speeds, malfunctions), then:
 
-In the 📁 `envs` folder, there is a 📝 `params.py` file in which the parameters of the environment can be specified.  This includes attributes about the Flatland environment, such as height, width, number of agents, and number of stations.  This also includes attributes about how the simulation will function, such as the speeds of the trains, how frequently they will malfuncion, and whether the trains should be removed upon reaching their targets.  These attributes are then inehrent to the environment and cannot be changed later.  This means, for example, neither the number of trains nor whether they malfunction can be modified.
-
-All of the parameters in the file are necessary for the successful generation of a Flatland environment, so they must remain, but their assigned values can be adjusted, so long as they remain the same data type as originally given (e.g. `int`, `bool`).
-
-In order to build a new environment from the command line, call `python build.py` followed by the number of environments you would like to create.
 ```
 python build.py 3
 ```
 
-When this is called, the attributes of the environment will look to the 📝 `params.py` file to be determined.  Make the desired changes before executing the command line call.  The ensuing environments will be saved in the 📁 `envs` folder.  Each environment will be represented in three formats:
-1. `lp` a file of clingo facts
-2. `pkl` a serialization of the environment as a Python object
-3. `png` an image of the environment
+Each environment is saved in three formats: `.lp` (clingo facts, for encoding development), `.pkl` (serialized environment, for simulation), and `.png` (visual reference). For this project, all trains run at full speed and malfunctions are disabled.
 
-<br>
+### Running the solver directly
 
-### 🧭 Generating paths
+For encoding development, clingo can be called on the `.lp` environment:
 
-#### 🧑‍💻 Initial development
-Individual developers are responsible for writing encodings in clingo that are capable of solving Flatland problems.  During the development phase, the `lp` representation of the environment may be beneficial for initial testing and debugging of the encoding or encodings.  Keep in mind that several encodings can be called simulatenously by clingo, for example:
 ```
-clingo envs/lp/test.lp asp/graph_based/graph.lp asp/graph_based/traverse.lp asp/graph_based/actions.lp
+clingo envs/lp/env_001--2_4.lp asp/custom/connection.lp asp/custom/encoding.lp asp/custom/generated_waypoints.lp asp/custom/waypoint.lp asp/custom/passenger_transfer.lp asp/custom/visual.lp asp/profiles/active_profile.lp
 ```
 
-The order is not important.  What will ultimately be necessary is that the output be appropriately formatted in the following manner:
-`action(train(ID), Action, Time).` 
+For the full simulation, set the `primary` list in `asp/params.py` to the encodings above, then:
 
-The `Action` variable must be one of the following:
-- `move_forward`
-- `move_left`
-- `move_right`
-- `wait`
-
-Once an encoding or set of encodings has been developed that produces valid paths in the form of the appropriate `action(...)` output, developers can begin official testing using this framework.
-
----
-
-#### 📋 Official testing
-
-Since it is encouraged that developers explore several approaches to their encodings, the toolkit allows developers to specify which encodings should be testing.  This is controlled from within the 📁 `asp` folder in the 📝 `params.py` file.  There are two parameters:
-- `primary`
-- `secondary [optional]`
-
-Each of them is a set of file paths to the desired encodings, for example:
 ```
-primary=['asp/graph_based/actions.lp','asp/graph_based/graph.lp','asp/graph_based/traverse.lp']
-secondary=['asp/vsrp/replan.lp']
+python solve.py envs/pkl/env_001--2_4.pkl
 ```
 
-The `primary` parameter is necessary, and is the standard suite of path planning encodings that return the appropriate `action(...)` output.  The `secondary` parameter is optional, and is primarily used when malfunctions are present in an environment.  Developers may choose to create a set of secondary encodings that help the replanning process necessary when faced with a train that has stalled.  For instance, it may be more efficient to consider the existing plan than to replan from the start.  More information about this is available in the 📁 `doc` folder.  If malfunctions are active and no `secondary` encoding is provided, the tooltik will call the `primary` set of encodings.
+The required output format is `action(train(ID), Action, Time).` where `Action` is one of `move_forward`, `move_left`, `move_right`, `wait`. The animation and a per-step log (`paths.csv`) are saved to `output/`.
 
-From the command line, call `python solve.py` along with a path to the `.pkl` form of the environment to test on, for example:
-```
-python solve.py envs/pkl/test.pkl
-```
+## Encodings
 
-If successful, the output will be saved as a `.gif` (which by the way is pronounced [/dʒɪf/](https://www.abc.net.au/news/2018-08-10/is-it-pronounced-gif-or-jif/10102374) according to the creator of the format) animation, as well as a log file that details at each step what occurred in the simulation.
+- `connection.lp` — builds the track graph from environment facts
+- `encoding.lp` — route choice and action output
+- `generated_waypoints.lp` — auto-extracted waypoints per train
+- `waypoint.lp` — stations, required visits, visit order
+- `passenger_transfer.lp` — passenger itineraries and transfer validation
+- `visual.lp` — the cost layer: each convenience criterion is computed per train, multiplied by its profile weight, and minimized
 
----
+Three conventions are essential for the plan to match the Flatland replay:
 
-#### 🔧 Troubleshooting
+1. **Spawn timing.** A train with start time N is off the map until N+2. The encoding emits forced `wait` actions for `0..N`, the spawning `move_forward` at N+1, and places the train on its start cell at N+2.
+2. **Steering labels.** Flatland interprets `move_left`/`move_right` relative to the direction the train currently faces. The encoding chooses the route internally (`steer/3`) and derives the action labels from consecutive movement directions afterwards; deriving them from edge letters directly emits turns one step early, which Flatland ignores at switches.
+3. **Model selection.** With `#minimize`, the optimum is the last model clingo yields. `modules/actionlist.py` therefore executes `models[-1]`.
 
-If the run was unsuccessful, it may be due to any number of reasons.  Some popular reasons may be:
-- **an invalid move was provided**, which could be the result of many causes
-  - the sequence of actions is correct but is offset by some number of time steps
-  - a train malfunctioned and the actions were provided during the incorrect time step
-  - some aspect of the representation of the environment has been transformed, for instance by inverting the axes, and the given action is not valid for the Flatland representation
-- **the simulation ran out of time steps**, and as Flatland sets a fairly large internal maximum number of time steps, this typically only happens under certain circumstances, such as when:
-  - malfunctions of significant durations occur
-  - the environment was initially set to **not** remove agents upon reaching their targets, and an agent is therefore inadvertantly blocking another agent from reaching the target station
-- **the encoding doesn't actually provide valid paths**
-  - realistically, it can be difficult to validate whether paths are valid by solely reading through the output alone -- that is why visualization is such an important tool
-  - often this happens when the logic from Flatland is not properly mirrored and the encoding "loses track" of where a train actually is
+## Troubleshooting
 
-Reading through the output log is a good place to start searching for the issue.  For more extreme cases, it might be worth calling attributes directly from the Flatland code.  There are some helpful tips provided in [Developer Tips](https://github.com/krr-up/flatland/blob/updates/doc/dev_tips.md) that show expected output for different function or attribute calls.  However, it is not recommended to include this modified Flatland code in the final version of the group's project.  Be sure to create a separate branch for debugging, and once the problem has been resolved, return to the primary working branch to resume testing the encodings.
-
-<br>
+- **Trains deviate from the plan or deadlock:** check `output/<run>/paths.csv`. Each row logs a train's position, state, and the command it received, which makes it possible to align plan and execution step by step. Deviations usually point to one of the three conventions above.
+- **`ModuleNotFoundError` when running `solve.py`:** a Flatland dependency is missing or the installed Flatland major version does not match the `.pkl` environments (see Installation).
+- **Unsatisfiable:** the environment has no valid schedule under the current constraints; try regenerating the environment or checking the deadlines in the `.lp` facts.
+- **The simulation runs out of time steps:** typically caused by agents not being removed at their targets and blocking each other; check `remove_agents_at_target` in `envs/params.py`.
 
 ## Working example
 
-Want to try it out on a test environment first and see how it works?  
-- In the  📁 `envs` folder, check out the environment `test.png` to see what it looks like
-- In the 📁 `asp` folder, check out the 📝 `test.lp` list of actions, which is an example of output from an encoding
-
-First, from within the 📁 `asp` folder, modify the 📝 `params.py` file to read `primary=['asp/test.lp']`. Then, from the `/flatland` directory, run the following command:
 ```
-python solve.py envs/pkl/test.pkl
+conda activate flatland
+streamlit run ui/app.py
 ```
 
-The resulting output will be saved as a `.gif` in the 📁 `output` folder.
+Select the `balanced` profile, the environment `env_001--2_4`, mode "full animation", and press solve. The resulting GIF shows one train briefly taking a passing loop to let the other pass — the schedule the optimizer selected under the balanced weights.

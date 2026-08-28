@@ -1,0 +1,60 @@
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:24:5-36: info: atom does not occur in any rule head:
+  visited_station(Train,Station)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:43:5-30: info: atom does not occur in any rule head:
+  transfer_station(Station)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:44:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train1,Order1)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:45:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train2,Order2)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:17:5-18: info: atom does not occur in any rule head:
+  reached(ID,T)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:18:9-24: info: atom does not occur in any rule head:
+  reached(ID,(T+-1))
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:22:5-18: info: atom does not occur in any rule head:
+  reached(ID,0)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:32:5-26: info: atom does not occur in any rule head:
+  start(#X0,#P1,#X2,#P3)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:40:5-14: info: atom does not occur in any rule head:
+  train(ID)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:42:13-39: info: atom does not occur in any rule head:
+  action(train(ID),wait,T)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:43:13-28: info: atom does not occur in any rule head:
+  pos(ID,#Anon0,#Anon1,#Anon2,T)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:44:17-30: info: atom does not occur in any rule head:
+  reached(ID,T)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:52:5-14: info: atom does not occur in any rule head:
+  train(ID)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:53:22-53: info: atom does not occur in any rule head:
+  action(train(ID),move_left,T)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:56:5-14: info: atom does not occur in any rule head:
+  train(ID)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:57:22-54: info: atom does not occur in any rule head:
+  action(train(ID),move_right,T)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:69:5-24: info: atom does not occur in any rule head:
+  waypoint(ID,WP,X,Y)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:70:5-20: info: atom does not occur in any rule head:
+  pos(#X0,#X1,#X2,#P3,#X4)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:82:5-14: info: atom does not occur in any rule head:
+  train(ID)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\visual.lp:88:5-14: info: atom does not occur in any rule head:
+  train(ID)
+

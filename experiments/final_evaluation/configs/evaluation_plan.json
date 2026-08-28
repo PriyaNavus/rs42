@@ -1,0 +1,19 @@
+{
+  "evaluation_name": "RS42 final controlled evaluation",
+  "environments": [
+    "e1_fast_slow",
+    "e2_transfer_network",
+    "e3_waiting_network",
+    "e4_simple_complex"
+  ],
+  "profiles": [
+    "fastest",
+    "least_waiting",
+    "fewest_transfers",
+    "simple",
+    "balanced"
+  ],
+  "primary_runs": 20,
+  "backend_policy": "frozen_during_evaluation",
+  "output_root": "experiments/final_evaluation"
+}

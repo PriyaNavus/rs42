@@ -1,0 +1,41 @@
+{
+  "environment": "e6_shared_conflict",
+  "source_environment": "test",
+  "experiment_type": "infrastructure_robustness",
+  "purpose": "multi-train conflict-free scheduling and ASP-to-Flatland executability",
+  "construction_policy": "promoted from existing validated RS42 test environment",
+  "passenger_preference_claims": false,
+  "agent_count": 2,
+  "agents": [
+    {
+      "train": 0,
+      "start": [
+        18,
+        7
+      ],
+      "target": [
+        16,
+        24
+      ],
+      "initial_direction": 3,
+      "earliest_departure": 3,
+      "latest_arrival": 59
+    },
+    {
+      "train": 1,
+      "start": [
+        15,
+        24
+      ],
+      "target": [
+        19,
+        7
+      ],
+      "initial_direction": 3,
+      "earliest_departure": 7,
+      "latest_arrival": 42
+    }
+  ],
+  "source_validation": "PASS",
+  "canonical_e6_validation": "PASS"
+}\n

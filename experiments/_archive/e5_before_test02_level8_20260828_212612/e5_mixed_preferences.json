@@ -1,0 +1,48 @@
+{
+  "environment": "e5_mixed_preferences",
+  "status": "FROZEN_VALIDATED_CONFIGURATION",
+  "purpose": "integrated mixed-preference passenger experiment",
+  "movement_steps": [
+    18,
+    4,
+    4,
+    4,
+    7,
+    8
+  ],
+  "route_turns": [
+    4,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "validated_reference_results": {
+    "fastest": {
+      "journey": 14,
+      "wait": 2,
+      "transfers": 2
+    },
+    "least_waiting": {
+      "journey": 18,
+      "wait": 0,
+      "transfers": 0
+    },
+    "fewest_transfers": {
+      "journey": 18,
+      "wait": 0,
+      "transfers": 0
+    },
+    "simple": {
+      "journey": 16,
+      "wait": 1,
+      "transfers": 1
+    },
+    "balanced": {
+      "journey": 18,
+      "wait": 0,
+      "transfers": 0
+    }
+  }
+}

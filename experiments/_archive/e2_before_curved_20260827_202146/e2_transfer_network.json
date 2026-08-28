@@ -1,0 +1,73 @@
+{
+  "environment": "e2_transfer_network",
+  "purpose": "controlled direct-vs-multi-transfer passenger experiment",
+  "symbolic_stations": [
+    "origin",
+    "station_b",
+    "station_c",
+    "destination"
+  ],
+  "services": {
+    "direct": {
+      "train": 0,
+      "release": 0,
+      "expected_steps": 18
+    },
+    "transfer_leg_1": {
+      "train": 1,
+      "release": 0,
+      "expected_steps": 4,
+      "from": "origin",
+      "to": "station_b"
+    },
+    "transfer_leg_2": {
+      "train": 2,
+      "release": 5,
+      "expected_steps": 4,
+      "from": "station_b",
+      "to": "station_c"
+    },
+    "transfer_leg_3": {
+      "train": 3,
+      "release": 10,
+      "expected_steps": 4,
+      "from": "station_c",
+      "to": "destination"
+    }
+  },
+  "verification": {
+    "fastest": {
+      "profile": "fastest",
+      "status": "OPTIMUM FOUND",
+      "journey_time": 14,
+      "transfer_wait": 2,
+      "transfers": 2,
+      "chosen_legs": [
+        "chosen_leg(p1,1,1,origin,station_b,2,6)",
+        "chosen_leg(p1,2,2,station_b,station_c,7,11)",
+        "chosen_leg(p1,3,3,station_c,destination,12,16)"
+      ]
+    },
+    "fewest_transfers": {
+      "profile": "fewest_transfers",
+      "status": "OPTIMUM FOUND",
+      "journey_time": 18,
+      "transfer_wait": 0,
+      "transfers": 0,
+      "chosen_legs": [
+        "chosen_leg(p1,1,0,origin,destination,2,20)"
+      ]
+    },
+    "tradeoff_verified": true
+  },
+  "planning_horizon": 22,
+  "timetable_policy": "tight arrival windows; train schedules are effectively fixed so E2 measures passenger itinerary selection rather than large-scale timetable search",
+  "expected_transfer_journey": 14,
+  "expected_direct_journey": 18,
+  "physical_track_lengths": [
+    21,
+    7,
+    7,
+    7
+  ]
+}

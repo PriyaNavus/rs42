@@ -1,0 +1,80 @@
+{
+  "environment": "e3_waiting_network",
+  "purpose": "controlled journey-time-vs-transfer-wait experiment",
+  "design_rule": "both passenger alternatives use exactly one transfer; only total journey time and transfer waiting differ",
+  "route_a_fast_high_wait": {
+    "trains": [
+      0,
+      1
+    ],
+    "releases": [
+      0,
+      8
+    ],
+    "movement_steps": [
+      3,
+      3
+    ],
+    "interchange": "station_b"
+  },
+  "route_b_slow_low_wait": {
+    "trains": [
+      2,
+      3
+    ],
+    "releases": [
+      0,
+      7
+    ],
+    "movement_steps": [
+      6,
+      6
+    ],
+    "interchange": "station_c"
+  },
+  "verification": {
+    "fastest": {
+      "profile": "fastest",
+      "status": "OPTIMUM FOUND",
+      "journey_time": 11,
+      "transfer_wait": 5,
+      "transfers": 1,
+      "chosen_legs": [
+        "chosen_leg(p1,1,0,origin,station_b,2,5)",
+        "chosen_leg(p1,2,1,station_b,destination,10,13)"
+      ]
+    },
+    "least_waiting": {
+      "profile": "least_waiting",
+      "status": "OPTIMUM FOUND",
+      "journey_time": 13,
+      "transfer_wait": 1,
+      "transfers": 1,
+      "chosen_legs": [
+        "chosen_leg(p1,1,2,origin,station_c,2,8)",
+        "chosen_leg(p1,2,3,station_c,destination,9,15)"
+      ]
+    },
+    "tradeoff_verified": true
+  },
+  "designed_passenger_tradeoff": {
+    "route_a": {
+      "journey_time": 11,
+      "transfer_wait": 5,
+      "transfers": 1
+    },
+    "route_b": {
+      "journey_time": 13,
+      "transfer_wait": 1,
+      "transfers": 1
+    }
+  },
+  "planning_horizon": 22,
+  "physical_track_lengths": [
+    6,
+    6,
+    9,
+    9
+  ],
+  "timetable_policy": "tight arrival windows; fixed service timing isolates passenger waiting preference"
+}

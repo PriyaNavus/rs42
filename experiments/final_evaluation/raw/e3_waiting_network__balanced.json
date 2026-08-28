@@ -1,0 +1,24 @@
+{
+  "Solver": "pyclingo version 5.6.1",
+  "Input": [
+    "C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\envs\\lp\\e3_waiting_network.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\connection.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\encoding.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\waypoint.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\passenger_transfer.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\visual.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\objectives.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\experiments\\final_evaluation\\configs\\runtime\\e3_waiting_network__balanced.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\scenarios\\e3_waiting_network.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\experiments\\final_evaluation\\configs\\runtime\\metric_collector.lp"
+  ],
+  "Call": [
+    {
+
+    }
+  ],
+  "Result": "UNSATISFIABLE",
+  "Models": {
+    "Number": 0,
+    "More": "no"
+  },
+  "Calls": 1,
+  "Time": {
+    "Total": 14.429,
+    "Solve": 0.000,
+    "Model": 0.000,
+    "Unsat": 0.000,
+    "CPU": 14.312
+  }
+}

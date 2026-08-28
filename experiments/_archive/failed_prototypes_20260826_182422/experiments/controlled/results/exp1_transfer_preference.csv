@@ -1,0 +1,3 @@
+profile,journey_time,transfer_wait,transfers,chosen_legs,clingo_status
+fastest,6,1,1,"chosen_leg(p,1,1,a,b,1,4) | chosen_leg(p,2,2,b,d,5,7)",OPTIMUM FOUND
+fewest_transfers,9,0,0,"chosen_leg(p,1,0,a,d,1,10)",OPTIMUM FOUND

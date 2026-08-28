@@ -1,0 +1,21 @@
+environment,profile,profile_label,status,runtime_seconds,journey_time,transfer_wait,transfers,turns,train_travel_time_sum,train_wait_time_sum,selected_trains,chosen_legs,optimization_cost
+e1_fast_slow,fastest,Fastest,OPTIMUM FOUND,34.738,10,0,0,0,10,,0,"chosen_leg(p1,1,0,origin,destination,2,12)","10,0,0,0,36"
+e1_fast_slow,least_waiting,Less Waiting,OPTIMUM FOUND,34.59,10,0,0,0,10,,0,"chosen_leg(p1,1,0,origin,destination,2,12)","0,10,0,0,36"
+e1_fast_slow,fewest_transfers,Fewer Transfers,OPTIMUM FOUND,34.634,10,0,0,0,10,,0,"chosen_leg(p1,1,0,origin,destination,2,12)","0,10,0,0,36"
+e1_fast_slow,simple,Simple Journey,OPTIMUM FOUND,34.331,10,0,0,0,10,,0,"chosen_leg(p1,1,0,origin,destination,2,12)","0,10,0,0,36"
+e1_fast_slow,balanced,Balanced,OPTIMUM FOUND,36.278,10,0,0,0,10,,0,"chosen_leg(p1,1,0,origin,destination,2,12)",296
+e2_transfer_network,fastest,Fastest,OPTIMUM FOUND,11.366,14,2,2,0,12,,"1,2,3","chosen_leg(p1,1,1,origin,station_b,2,6) | chosen_leg(p1,2,2,station_b,station_c,7,11) | chosen_leg(p1,3,3,station_c,destination,12,16)","14,2,2,0,76"
+e2_transfer_network,least_waiting,Less Waiting,OPTIMUM FOUND,11.35,18,0,0,0,18,,0,"chosen_leg(p1,1,0,origin,destination,2,20)","0,18,0,0,76"
+e2_transfer_network,fewest_transfers,Fewer Transfers,OPTIMUM FOUND,11.73,18,0,0,0,18,,0,"chosen_leg(p1,1,0,origin,destination,2,20)","0,18,0,0,76"
+e2_transfer_network,simple,Simple Journey,OPTIMUM FOUND,11.41,14,2,2,0,12,,"1,2,3","chosen_leg(p1,1,1,origin,station_b,2,6) | chosen_leg(p1,2,2,station_b,station_c,7,11) | chosen_leg(p1,3,3,station_c,destination,12,16)","0,14,2,2,76"
+e2_transfer_network,balanced,Balanced,OPTIMUM FOUND,11.943,18,0,0,0,18,,0,"chosen_leg(p1,1,0,origin,destination,2,20)",600
+e3_waiting_network,fastest,Fastest,OPTIMUM FOUND,16.046,11,5,1,0,6,,"0,1","chosen_leg(p1,1,0,origin,station_b,2,5) | chosen_leg(p1,2,1,station_b,destination,10,13)","11,5,1,0,64"
+e3_waiting_network,least_waiting,Less Waiting,OPTIMUM FOUND,16.257,13,1,1,0,12,,"2,3","chosen_leg(p1,1,2,origin,station_c,2,8) | chosen_leg(p1,2,3,station_c,destination,9,15)","1,13,1,0,64"
+e3_waiting_network,fewest_transfers,Fewer Transfers,OPTIMUM FOUND,16.284,11,5,1,0,6,,"0,1","chosen_leg(p1,1,0,origin,station_b,2,5) | chosen_leg(p1,2,1,station_b,destination,10,13)","1,11,5,0,64"
+e3_waiting_network,simple,Simple Journey,OPTIMUM FOUND,16.317,11,5,1,0,6,,"0,1","chosen_leg(p1,1,0,origin,station_b,2,5) | chosen_leg(p1,2,1,station_b,destination,10,13)","0,11,5,1,64"
+e3_waiting_network,balanced,Balanced,OPTIMUM FOUND,16.785,13,1,1,0,12,,"2,3","chosen_leg(p1,1,2,origin,station_c,2,8) | chosen_leg(p1,2,3,station_c,destination,9,15)",504
+e4_simple_complex,fastest,Fastest,OPTIMUM FOUND,0.836,32,,1,8,32,,"0,1",,"32,0,1,8,33"
+e4_simple_complex,least_waiting,Less Waiting,OPTIMUM FOUND,148.864,32,,1,8,32,,"0,1",,"0,32,1,8,33"
+e4_simple_complex,fewest_transfers,Fewer Transfers,OPTIMUM FOUND,0.817,32,,1,8,32,,"0,1",,"1,32,0,8,33"
+e4_simple_complex,simple,Simple Journey,OPTIMUM FOUND,1.309,41,,1,4,41,,"0,1",,"4,41,11,1,55"
+e4_simple_complex,balanced,Balanced,OPTIMUM FOUND,1.269,32,,1,8,32,,"0,1",,494

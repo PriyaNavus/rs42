@@ -1,0 +1,38 @@
+{
+  "Solver": "pyclingo version 5.6.1",
+  "Input": [
+    "C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\experiments\\controlled\\results\\raw\\exp1_fewest_transfers.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\passenger_transfer.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\visual.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\objectives.lp"
+  ],
+  "Call": [
+    {
+      "Witnesses": [
+        {
+          "Value": [
+            "journey_length(p,1)", "chosen_leg(p,1,0,a,d,1,10)", "passenger_journey_time(p,9)", "passenger_transfer_wait(p,0)", "transfer_count(p,0)"
+          ],
+          "Costs": [
+            0, 9, 0, 1, 0
+          ]
+        }
+      ]
+    }
+  ],
+  "Result": "OPTIMUM FOUND",
+  "Models": {
+    "Number": 1,
+    "More": "no",
+    "Optimum": "yes",
+    "Optimal": 1,
+    "Costs": [
+      0, 9, 0, 1, 0
+    ]
+  },
+  "Calls": 1,
+  "Time": {
+    "Total": 0.008,
+    "Solve": 0.000,
+    "Model": 0.000,
+    "Unsat": 0.000,
+    "CPU": 0.016
+  }
+}

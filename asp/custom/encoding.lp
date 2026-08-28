@@ -59,9 +59,18 @@ pos(ID, X', Y', OutDirNum, T+1) :-
 pos(ID, X, Y, Dir, T+1) :-
     pos(ID, X, Y, Dir, T), steer(ID, wait, T), max_time(MT), T < MT.
 
-% after reaching the goal, the train stays anchored at its target cell
-pos(ID, X, Y, Dir, T+1) :-
-    pos(ID, X, Y, Dir, T), reached(ID, T), max_time(MT), T < MT.
+% after reaching the goal, the train leaves active occupancy.
+% This matches Flatland environments configured with
+% remove_agents_at_target=True.
+%
+% Do NOT propagate pos/5 after reached(ID,T).  Safety constraints therefore
+% stop treating a completed train as a permanently parked obstacle.
+removed(ID, T+1) :-
+    reached(ID, T), max_time(MT), T < MT.
+
+% once removed, remain logically removed (but not physically occupying rail)
+removed(ID, T+1) :-
+    removed(ID, T), max_time(MT), T < MT.
 
 % ---- flatland labels (2) ----
 % direction of the move a train actually performs at time T

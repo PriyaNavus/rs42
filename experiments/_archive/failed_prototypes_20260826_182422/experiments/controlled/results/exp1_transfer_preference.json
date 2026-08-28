@@ -1,0 +1,50 @@
+{
+  "experiment": "Experiment 1 - Fastest vs Fewer Transfers",
+  "type": "controlled ASP preference experiment",
+  "controlled_case": {
+    "direct_itinerary": {
+      "journey_time": 9,
+      "transfers": 0
+    },
+    "transfer_itinerary": {
+      "journey_time": 6,
+      "transfers": 1
+    }
+  },
+  "results": [
+    {
+      "profile": "fastest",
+      "journey_time": 6,
+      "transfer_wait": 1,
+      "transfers": 1,
+      "chosen_legs": [
+        "chosen_leg(p,1,1,a,b,1,4)",
+        "chosen_leg(p,2,2,b,d,5,7)"
+      ],
+      "clingo_status": "OPTIMUM FOUND"
+    },
+    {
+      "profile": "fewest_transfers",
+      "journey_time": 9,
+      "transfer_wait": 0,
+      "transfers": 0,
+      "chosen_legs": [
+        "chosen_leg(p,1,0,a,d,1,10)"
+      ],
+      "clingo_status": "OPTIMUM FOUND"
+    }
+  ],
+  "interpretation_boundary": "This controlled case tests preference-selection behavior. Flatland execution validity is reported separately using real RS42 environments.",
+  "flatland_execution_validation": [
+    {
+      "environment": "env_001--2_4.pkl",
+      "validation": "PASS",
+      "returncode": 0
+    },
+    {
+      "environment": "test.pkl",
+      "validation": "PASS",
+      "returncode": 0
+    }
+  ]
+}

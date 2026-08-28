@@ -1,0 +1,12 @@
+{
+  "environment": "e4_simple_complex",
+  "source_environment": "env_001--2_4",
+  "purpose": "canonical real-Flatland route-complexity environment for Fastest vs Simple Journey evaluation",
+  "construction_policy": "promoted from an existing validated RS42 environment rather than rebuilding fragile custom corner geometry",
+  "backend_policy": "frozen",
+  "agent_count": 2,
+  "planning_horizon": 29,
+  "flatland_execution_validation": "PASS",
+  "validation_log": "experiments\\final_evaluation\\logs\\e4_simple_complex_validation.txt",
+  "evaluation_note": "Fastest and Simple Journey are re-measured during the final 20-run evaluation; no result values are hard-coded here."
+}

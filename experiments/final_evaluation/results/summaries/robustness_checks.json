@@ -1,0 +1,53 @@
+{
+  "scope": "E6 multi-train infrastructure robustness",
+  "interpretation": "solver/profile robustness only; not passenger-transfer preference evidence",
+  "checks": [
+    {
+      "name": "E6 Fastest reaches an optimum",
+      "environment": "e6_shared_conflict",
+      "profile": "fastest",
+      "status": "OPTIMUM FOUND",
+      "runtime_seconds": 5.016,
+      "metric_scope": "system_all_trains",
+      "pass": true
+    },
+    {
+      "name": "E6 Less Waiting reaches an optimum",
+      "environment": "e6_shared_conflict",
+      "profile": "least_waiting",
+      "status": "TIMEOUT",
+      "runtime_seconds": 1200.031,
+      "metric_scope": "system_all_trains",
+      "pass": false
+    },
+    {
+      "name": "E6 Fewer Transfers reaches an optimum",
+      "environment": "e6_shared_conflict",
+      "profile": "fewest_transfers",
+      "status": "OPTIMUM FOUND",
+      "runtime_seconds": 4.695,
+      "metric_scope": "system_all_trains",
+      "pass": true
+    },
+    {
+      "name": "E6 Simple Journey reaches an optimum",
+      "environment": "e6_shared_conflict",
+      "profile": "simple",
+      "status": "OPTIMUM FOUND",
+      "runtime_seconds": 350.709,
+      "metric_scope": "system_all_trains",
+      "pass": true
+    },
+    {
+      "name": "E6 Balanced reaches an optimum",
+      "environment": "e6_shared_conflict",
+      "profile": "balanced",
+      "status": "OPTIMUM FOUND",
+      "runtime_seconds": 8.525,
+      "metric_scope": "system_all_trains",
+      "pass": true
+    }
+  ],
+  "passed": 4,
+  "total": 5
+}

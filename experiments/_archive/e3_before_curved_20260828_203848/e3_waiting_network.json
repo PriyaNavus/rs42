@@ -1,0 +1,70 @@
+{
+  "environment": "e3_waiting_network",
+  "geometry_version": "meaningful_network_v2_bufferfix",
+  "movement_steps": [
+    3,
+    3,
+    6,
+    6
+  ],
+  "route_turns": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "verification": {
+    "fastest": {
+      "status": "OPTIMUM FOUND",
+      "journey": 11,
+      "wait": 5,
+      "transfers": 1,
+      "legs": [
+        {
+          "leg": 1,
+          "train": 0,
+          "from": "origin",
+          "to": "station_b",
+          "board": 2,
+          "alight": 5,
+          "atom": "chosen_leg(p1,1,0,origin,station_b,2,5)"
+        },
+        {
+          "leg": 2,
+          "train": 1,
+          "from": "station_b",
+          "to": "destination",
+          "board": 10,
+          "alight": 13,
+          "atom": "chosen_leg(p1,2,1,station_b,destination,10,13)"
+        }
+      ]
+    },
+    "least_waiting": {
+      "status": "OPTIMUM FOUND",
+      "journey": 13,
+      "wait": 1,
+      "transfers": 1,
+      "legs": [
+        {
+          "leg": 1,
+          "train": 2,
+          "from": "origin",
+          "to": "station_c",
+          "board": 2,
+          "alight": 8,
+          "atom": "chosen_leg(p1,1,2,origin,station_c,2,8)"
+        },
+        {
+          "leg": 2,
+          "train": 3,
+          "from": "station_c",
+          "to": "destination",
+          "board": 9,
+          "alight": 15,
+          "atom": "chosen_leg(p1,2,3,station_c,destination,9,15)"
+        }
+      ]
+    }
+  }
+}

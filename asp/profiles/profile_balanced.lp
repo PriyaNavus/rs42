@@ -1,3 +1,6 @@
+% Weighted multi-objective optimization
+objective_mode(weighted).
+
 #const w_arrival = 8.
 #const w_wait = 8.
 #const w_transfer = 8.

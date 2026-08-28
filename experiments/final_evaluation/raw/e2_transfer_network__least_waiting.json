@@ -1,0 +1,38 @@
+{
+  "Solver": "pyclingo version 5.6.1",
+  "Input": [
+    "C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\envs\\lp\\e2_transfer_network.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\connection.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\encoding.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\waypoint.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\passenger_transfer.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\visual.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\objectives.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\experiments\\final_evaluation\\configs\\runtime\\e2_transfer_network__least_waiting.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\scenarios\\e2_transfer_network.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\experiments\\final_evaluation\\configs\\runtime\\metric_collector.lp"
+  ],
+  "Call": [
+    {
+      "Witnesses": [
+        {
+          "Value": [
+            "turns(0,0)", "turns(1,0)", "turns(2,0)", "turns(3,0)", "visited_station(0,origin)", "visited_station(1,origin)", "visited_station(2,station_b)", "visited_station(3,station_c)", "action(train(0),wait,0)", "action(train(1),wait,0)", "action(train(2),wait,0)", "action(train(2),wait,1)", "action(train(2),wait,2)", "action(train(2),wait,3)", "action(train(2),wait,4)", "action(train(2),wait,5)", "action(train(3),wait,0)", "action(train(3),wait,1)", "action(train(3),wait,2)", "action(train(3),wait,3)", "action(train(3),wait,4)", "action(train(3),wait,5)", "action(train(3),wait,6)", "action(train(3),wait,7)", "action(train(3),wait,8)", "action(train(3),wait,9)", "action(train(3),wait,10)", "action(train(0),move_forward,1)", "action(train(1),move_forward,1)", "action(train(2),move_forward,6)", "action(train(3),move_forward,11)", "first_station_visit(0,origin,2)", "first_station_visit(1,origin,2)", "first_station_visit(2,station_b,7)", "first_station_visit(3,station_c,12)", "first_station_visit(1,station_b,6)", "first_station_visit(2,station_c,11)", "first_station_visit(3,destination,16)", "first_station_visit(0,destination,20)", "journey_length(p1,1)", "chosen_leg(p1,1,0,origin,destination,2,20)", "passenger_journey_time(p1,18)", "travel_time(0,18)", "travel_time(1,4)", "travel_time(2,4)", "travel_time(3,4)", "passenger_transfer_wait(p1,0)", "passenger_uses_train(p1,0)", "visited_station(1,station_b)", "visited_station(2,station_c)", "visited_station(3,destination)", "visited_station(0,destination)", "transfer_count(p1,0)", "action(train(0),move_forward,2)", "action(train(1),move_forward,2)", "action(train(2),move_forward,7)", "action(train(3),move_forward,12)", "action(train(3),move_forward,13)", "action(train(2),move_forward,8)", "action(train(1),move_forward,3)", "action(train(0),move_forward,3)", "action(train(0),move_forward,4)", "action(train(1),move_forward,4)", "action(train(2),move_forward,9)", "action(train(3),move_forward,14)", "action(train(3),move_forward,15)", "action(train(2),move_forward,10)", "action(train(1),move_forward,5)", "action(train(0),move_forward,5)", "action(train(0),move_forward,6)", "action(train(0),move_forward,7)", "action(train(0),move_forward,8)", "action(train(0),move_forward,9)", "action(train(0),move_forward,10)", "action(train(0),move_forward,11)", "action(train(0),move_forward,12)", "action(train(0),move_forward,13)", "action(train(0),move_forward,14)", "action(train(0),move_forward,15)", "action(train(0),move_forward,16)", "action(train(0),move_forward,17)", "action(train(0),move_forward,18)", "action(train(0),move_forward,19)"
+          ],
+          "Costs": [
+            0, 18, 0, 0, 76
+          ]
+        }
+      ]
+    }
+  ],
+  "Result": "OPTIMUM FOUND",
+  "Models": {
+    "Number": 1,
+    "More": "no",
+    "Optimum": "yes",
+    "Optimal": 1,
+    "Costs": [
+      0, 18, 0, 0, 76
+    ]
+  },
+  "Calls": 1,
+  "Time": {
+    "Total": 11.213,
+    "Solve": 0.246,
+    "Model": 0.009,
+    "Unsat": 0.238,
+    "CPU": 11.078
+  }
+}

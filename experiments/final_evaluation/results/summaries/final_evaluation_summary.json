@@ -1,0 +1,50 @@
+{
+  "evaluation": "RS42 final six-environment evaluation",
+  "final_status": "PASS_WITH_LIMITATION",
+  "attempted_optimization_runs": 30,
+  "overall_optimum_found": 29,
+  "required_preference_scope": "E1-E5",
+  "required_preference_runs": {
+    "optimum_found": 25,
+    "total": 25,
+    "status": "PASS"
+  },
+  "controlled_checks": {
+    "passed": 10,
+    "total": 10
+  },
+  "flatland_validation": {
+    "passed": 6,
+    "total": 6
+  },
+  "e6_infrastructure_robustness": {
+    "canonical_validation": "PASS",
+    "supplementary_profile_runs_optimum_found": 4,
+    "supplementary_profile_runs_total": 5,
+    "profile_results": {
+      "fastest": {
+        "status": "OPTIMUM FOUND",
+        "runtime_seconds": "5.016"
+      },
+      "least_waiting": {
+        "status": "TIMEOUT",
+        "runtime_seconds": "1200.031"
+      },
+      "fewest_transfers": {
+        "status": "OPTIMUM FOUND",
+        "runtime_seconds": "4.695"
+      },
+      "simple": {
+        "status": "OPTIMUM FOUND",
+        "runtime_seconds": "350.709"
+      },
+      "balanced": {
+        "status": "OPTIMUM FOUND",
+        "runtime_seconds": "8.525"
+      }
+    },
+    "limitation": "E6 Less Waiting did not prove optimality within 1200 seconds. E6 is an infrastructure-robustness environment and intentionally has no passenger OD / transfer-wait structure. Therefore this profile is treated as a supplementary solver stress test, not as a required passenger-preference validation."
+  },
+  "supported_claim": "Across E1-E5, RS42 produced optimal solutions matching the intended semantic preference trade-offs, while all six canonical environments passed ASP-to-Flatland execution validation.",
+  "not_claimed": "The evaluation does not claim that every passenger preference objective is computationally efficient or meaningful on an infrastructure-only environment."
+}

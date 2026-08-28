@@ -1,0 +1,51 @@
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:31:5-17: info: atom does not occur in any rule head:
+  passenger(P)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:32:5-26: info: atom does not occur in any rule head:
+  passenger_origin(#X0,#P1)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:33:5-31: info: atom does not occur in any rule head:
+  passenger_destination(#X0,#P1)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:36:5-17: info: atom does not occur in any rule head:
+  passenger(P)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:43:5-30: info: atom does not occur in any rule head:
+  transfer_station(Station)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:44:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train1,Order1)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:45:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train2,Order2)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:92:4-30: info: atom does not occur in any rule head:
+  passenger_origin(P,Origin)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:97:4-40: info: atom does not occur in any rule head:
+  passenger_destination(P,Destination)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\waypoint.lp:13:5-28: info: atom does not occur in any rule head:
+  must_visit(ID,Station)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\waypoint.lp:14:5-29: info: atom does not occur in any rule head:
+  station(Station,ID,WP)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\waypoint.lp:18:5-36: info: atom does not occur in any rule head:
+  flatland_waypoint(ID,WP,X,Y)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\waypoint.lp:21:5-29: info: atom does not occur in any rule head:
+  station(Station,ID,WP)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\waypoint.lp:26:5-29: info: atom does not occur in any rule head:
+  station(Station,ID,WP)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\waypoint.lp:39:4-27: info: atom does not occur in any rule head:
+  must_visit(ID,Station)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\waypoint.lp:42:4-29: info: atom does not occur in any rule head:
+  station_order(ID,S1,S2)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\experiments\final_evaluation\configs\runtime\metric_collector_30run.lp:12:1-19: info: no atoms over signature occur in program:
+  wait_time/2
+

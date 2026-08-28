@@ -1,0 +1,17 @@
+{
+  "environment": "e1_fast_slow",
+  "geometry_version": "meaningful_network_v2",
+  "fast": {
+    "steps": 10,
+    "turns": 4
+  },
+  "slow": {
+    "steps": 18,
+    "turns": 4
+  },
+  "verification": {
+    "status": "OPTIMUM FOUND",
+    "fastest_train": 0,
+    "journey_time": 10
+  }
+}

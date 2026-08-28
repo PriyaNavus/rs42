@@ -1,0 +1,43 @@
+{
+  "environment": "e1_fast_slow",
+  "purpose": "controlled fast-vs-slow passenger route experiment",
+  "symbolic_origin": "origin",
+  "symbolic_destination": "destination",
+  "fast_service": {
+    "train": 0,
+    "origin_platform": [
+      3,
+      1
+    ],
+    "destination_platform": [
+      3,
+      11
+    ],
+    "expected_steps": 10
+  },
+  "slow_service": {
+    "train": 1,
+    "origin_platform": [
+      8,
+      1
+    ],
+    "destination_platform": [
+      8,
+      19
+    ],
+    "expected_steps": 18
+  },
+  "verification": {
+    "clingo_status": "OPTIMUM FOUND",
+    "fastest_selected_train": 0,
+    "passenger_departure": 2,
+    "passenger_arrival": 12,
+    "passenger_journey_time": 10,
+    "chosen_leg": "chosen_leg(p1,1,0,origin,destination,2,12)"
+  },
+  "rail": {
+    "fast_drawn_cells": 13,
+    "slow_drawn_cells": 21,
+    "planning_horizon": 35
+  }
+}

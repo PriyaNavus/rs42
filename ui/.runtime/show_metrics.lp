@@ -1,0 +1,9 @@
+#show chosen_leg/7.
+#show passenger_journey_time/2.
+#show passenger_transfer_wait/2.
+#show passenger_uses_train/2.
+#show uses_train/3.
+#show transfer_count/2.
+#show arrival/2.
+#show travel_time/2.
+#show turns/2.

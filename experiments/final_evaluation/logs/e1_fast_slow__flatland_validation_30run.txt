@@ -1,0 +1,24 @@
+flatland version 1.0
+Reading from asp/custom/connection.lp ...
+Solving...
+Answer: 1
+visited_station(0,origin) visited_station(1,origin) action(train(0),wait,0) action(train(1),wait,0) action(train(0),move_forward,1) action(train(1),move_forward,1) first_station_visit(0,origin,2) first_station_visit(1,origin,2) passenger_transfer_wait(p1,0) transfer_count(p1,0) first_station_visit(0,destination,12) first_station_visit(1,destination,20) journey_length(p1,1) chosen_leg(p1,1,0,origin,destination,2,12) passenger_journey_time(p1,10) action(train(0),move_right,6) action(train(1),move_right,8) action(train(0),move_left,8) action(train(1),move_left,12) visited_station(0,destination) visited_station(1,destination) action(train(0),move_forward,2) action(train(1),move_forward,2) action(train(1),move_forward,3) action(train(0),move_forward,3) action(train(0),move_forward,4) action(train(1),move_forward,4) action(train(1),move_forward,5) action(train(0),move_forward,5) action(train(1),move_forward,6) action(train(1),move_forward,7) action(train(0),move_forward,7) action(train(1),move_forward,9) action(train(0),move_forward,9) action(train(0),move_forward,10) action(train(1),move_forward,10) action(train(1),move_forward,11) action(train(0),move_forward,11) action(train(1),move_forward,13) action(train(1),move_forward,14) action(train(1),move_forward,15) action(train(1),move_forward,16) action(train(1),move_forward,17) action(train(1),move_forward,18) action(train(1),move_forward,19)
+Optimization: 304
+OPTIMUM FOUND
+
+Models       : 1
+  Optimum    : yes
+Optimization : 304
+Calls        : 1
+Time         : 9.947s (Solving: 0.21s 1st Model: 0.01s Unsat: 0.20s)
+CPU Time     : 8.312s
+RS42_VALIDATION: PASS - ASP plan matched Flatland and all trains reached their targets.
+asp/custom/passenger_transfer.lp:43:5-30: info: atom does not occur in any rule head:
+  transfer_station(Station)
+
+asp/custom/passenger_transfer.lp:44:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train1,Order1)
+
+asp/custom/passenger_transfer.lp:45:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train2,Order2)
+

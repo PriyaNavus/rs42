@@ -3,16 +3,11 @@
 % Station-based waypoint constraints
 % ============================================================
 
-station(s1, 0, wp9).
-station(s2, 0, wp13).
 
-must_visit(0, s1).
-must_visit(0, s2).
 
-station(s2, 1, wp2).
-must_visit(1, s2).
 
-station_order(0, s1, s2).
+
+% Scenario-specific facts are loaded from asp/scenarios/*.lp
 
 required_waypoint(ID, WP) :-
     must_visit(ID, Station),

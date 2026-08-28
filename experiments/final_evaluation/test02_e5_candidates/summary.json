@@ -1,0 +1,112 @@
+[
+  {
+    "level": "Level_0",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 218,
+    "max_episode_steps": 490,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_0.png'",
+    "error": ""
+  },
+  {
+    "level": "Level_1",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 150,
+    "max_episode_steps": 479,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_1.png'",
+    "error": ""
+  },
+  {
+    "level": "Level_2",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 193,
+    "max_episode_steps": 366,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_2.png'",
+    "error": ""
+  },
+  {
+    "level": "Level_3",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 177,
+    "max_episode_steps": 436,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_3.png'",
+    "error": ""
+  },
+  {
+    "level": "Level_4",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 154,
+    "max_episode_steps": 349,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_4.png'",
+    "error": ""
+  },
+  {
+    "level": "Level_5",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 180,
+    "max_episode_steps": 323,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_5.png'",
+    "error": ""
+  },
+  {
+    "level": "Level_6",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 154,
+    "max_episode_steps": 435,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_6.png'",
+    "error": ""
+  },
+  {
+    "level": "Level_7",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 159,
+    "max_episode_steps": 244,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_7.png'",
+    "error": ""
+  },
+  {
+    "level": "Level_8",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 160,
+    "max_episode_steps": 230,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_8.png'",
+    "error": ""
+  },
+  {
+    "level": "Level_9",
+    "status": "OK",
+    "width": 30,
+    "height": 30,
+    "trains": 20,
+    "rail_cells": 136,
+    "max_episode_steps": 306,
+    "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_9.png'",
+    "error": ""
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "purpose": "obsolete RS42 experiment prototypes",
+  "files_moved": [
+    {
+      "from": "tools\\build_od_transfer_01_v5.py",
+      "to": "experiments\\_archive\\failed_prototypes_20260826_182422\\tools\\build_od_transfer_01_v5.py"
+    },
+    {
+      "from": "tools\\run_exp1_transfer_preference.py",
+      "to": "experiments\\_archive\\failed_prototypes_20260826_182422\\tools\\run_exp1_transfer_preference.py"
+    },
+    {
+      "from": "experiments\\controlled",
+      "to": "experiments\\_archive\\failed_prototypes_20260826_182422\\experiments\\controlled"
+    }
+  ]
+}

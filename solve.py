@@ -4,6 +4,8 @@ import os
 import time
 import pickle
 import json
+import csv  # RS42_STEP1_BACKEND_VALIDATION
+from pathlib import Path
 from argparse import ArgumentParser, Namespace
 
 # custom modules
@@ -60,6 +62,7 @@ class SimulationManager():
     def __init__(self,env,primary,secondary=None):
         self.env = env
         self.primary = primary
+        self.plan_symbols = None
         if secondary is None:
             self.secondary = primary 
         else:
@@ -70,6 +73,7 @@ class SimulationManager():
         # pass env, primary
         app = FlatlandPlan(self.env, None)
         clingo_main(app, self.primary)
+        self.plan_symbols = app.model_symbols
         return(app.action_list)
 
     def provide_context(self, actions, timestep, malfunctions) -> str:
@@ -87,6 +91,7 @@ class SimulationManager():
         # pass env, secondary, context
         app = FlatlandPlan(self.env, context)
         clingo_main(app, self.primary)
+        self.plan_symbols = app.model_symbols
         return(app.action_list)
 
 
@@ -106,6 +111,110 @@ class OutputLogManager():
             f.write("agent;timestep;position;direction;status;given_command\n")
             for log in self.logs:
                 f.write(log)
+
+# RS42_STEP1_BACKEND_VALIDATION
+def extract_planned_positions(symbols):
+    """Return {(agent_id, timestep): (row, col)} from ASP pos/5 atoms."""
+    planned = {}
+    if not symbols:
+        return planned
+
+    for atom in symbols:
+        try:
+            if atom.name != "pos" or len(atom.arguments) != 5:
+                continue
+            agent_id = atom.arguments[0].number
+            row = atom.arguments[1].number
+            col = atom.arguments[2].number
+            timestep = atom.arguments[4].number
+        except (AttributeError, RuntimeError):
+            continue
+
+        planned[(agent_id, timestep)] = (row, col)
+
+    return planned
+
+
+def effective_flatland_position(agent, agent_done):
+    """Return the Flatland position used for comparison with the ASP plan."""
+    if agent.position is not None:
+        return tuple(agent.position)
+
+    # Flatland can remove a completed train from the map. ASP keeps a
+    # completed train anchored at its target.
+    if agent_done and agent.target is not None:
+        return tuple(agent.target)
+
+    return None
+
+
+def add_validation_rows(rows, env, done, planned_positions, action_timestep):
+    """
+    action(..., T) advances Flatland from state T to state T+1.
+    Compare the post-step Flatland state with ASP pos(..., T+1).
+    """
+    state_timestep = action_timestep + 1
+
+    for agent_id, agent in enumerate(env.agents):
+        planned = planned_positions.get((agent_id, state_timestep))
+        agent_done = bool(done.get(agent_id, False))
+        actual = effective_flatland_position(agent, agent_done)
+
+        # Before spawning, the ASP encoding intentionally has no pos/5 atom.
+        if planned is None:
+            match = None
+            status = "no_asp_position"
+        else:
+            match = planned == actual
+            status = "match" if match else "diverged"
+
+        rows.append({
+            "agent": agent_id,
+            "action_timestep": action_timestep,
+            "state_timestep": state_timestep,
+            "planned_position": planned,
+            "actual_position": actual,
+            "flatland_done": agent_done,
+            "match": match,
+            "status": status,
+        })
+
+
+def save_validation(output_dir, rows, done):
+    output_dir = Path(output_dir)
+
+    fields = [
+        "agent",
+        "action_timestep",
+        "state_timestep",
+        "planned_position",
+        "actual_position",
+        "flatland_done",
+        "match",
+        "status",
+    ]
+
+    with (output_dir / "validation.csv").open(
+        "w", newline="", encoding="utf-8"
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    divergences = [row for row in rows if row["match"] is False]
+    all_trains_done = bool(done.get("__all__", False))
+
+    summary = {
+        "success": all_trains_done and not divergences,
+        "all_trains_done": all_trains_done,
+        "divergence_count": len(divergences),
+        "first_divergence": divergences[0] if divergences else None,
+    }
+
+    with (output_dir / "validation.json").open("w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2)
+
+    return summary
 
 def check_params(par):
     """
@@ -148,7 +257,12 @@ def main():
 
     # create manager objects
     mal = MalfunctionManager(env.get_num_agents())
-    sim = SimulationManager(env, params.primary, params.secondary)
+    # RS42_STEP2A_SCENARIO_V3
+    scenario_path = Path("asp/scenarios") / f"{Path(args.env[0]).stem}.lp"
+    if not scenario_path.exists():
+        raise FileNotFoundError(f"Missing RS42 scenario file: {scenario_path}")
+    primary = list(params.primary) + [str(scenario_path)]
+    sim = SimulationManager(env, primary, params.secondary)
     log = OutputLogManager()
 
     # envrionment rendering
@@ -164,7 +278,15 @@ def main():
     state_map = {0:'waiting', 1:'ready to depart', 2:'malfunction (off map)', 3:'moving', 4:'stopped', 5:'malfunction (on map)', 6:'done'}
     dir_map = {0:'n', 1:'e', 2:'s', 3:'w'}
 
-    actions = sim.build_actions()
+    try:
+        actions = sim.build_actions()
+    except RuntimeError as exc:
+        print(f"RS42_SOLVER: UNSAT/FAILED - {exc}")
+        return 3
+    planned_positions = extract_planned_positions(sim.plan_symbols)
+    validation_rows = []
+    last_done = {i: False for i in range(env.get_num_agents())}
+    last_done["__all__"] = False
 
     timestep = 0
     while len(actions) > timestep:
@@ -173,6 +295,14 @@ def main():
             log.add(f'{a};{timestep};{env.agents[a].position};{dir_map[env.agents[a].direction]};{state_map[env.agents[a].state]};{action_map[actions[timestep][a]]}\n')
 
         _, _, done, info = env.step(actions[timestep])
+        last_done = done
+        add_validation_rows(
+            validation_rows,
+            env,
+            done,
+            planned_positions,
+            timestep,
+        )
 
         # end if simulation is finished
         if done['__all__'] and timestep < len(actions)-1:
@@ -185,6 +315,7 @@ def main():
         if len(new_malfs) > 0:
             context = sim.provide_context(actions, timestep, mal.get())
             actions = sim.update_actions(context)
+            planned_positions = extract_planned_positions(sim.plan_symbols)
 
         mal.deduct() #??? where in the loop should this go - before context?
         
@@ -237,6 +368,14 @@ def main():
     # save output log
     log.save(stamp)
 
+    summary = save_validation(Path("output") / str(stamp), validation_rows, last_done)
+    if summary["success"]:
+        print("RS42_VALIDATION: PASS - ASP plan matched Flatland and all trains reached their targets.")
+        return 0
+    print("RS42_VALIDATION: FAIL")
+    print(json.dumps(summary, indent=2))
+    return 2
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

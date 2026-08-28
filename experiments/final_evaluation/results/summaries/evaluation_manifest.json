@@ -1,0 +1,34 @@
+{
+  "version": "6env_30run_v1",
+  "environment_order": [
+    "e1_fast_slow",
+    "e2_transfer_network",
+    "e3_waiting_network",
+    "e4_simple_complex",
+    "e5_mixed_preferences",
+    "e6_shared_conflict"
+  ],
+  "environment_roles": {
+    "e1_fast_slow": "controlled_preference",
+    "e2_transfer_network": "controlled_preference",
+    "e3_waiting_network": "controlled_preference",
+    "e4_simple_complex": "controlled_preference",
+    "e5_mixed_preferences": "integrated_preference",
+    "e6_shared_conflict": "infrastructure_robustness"
+  },
+  "profile_order": [
+    "fastest",
+    "least_waiting",
+    "fewest_transfers",
+    "simple",
+    "balanced"
+  ],
+  "profile_files": {
+    "fastest": "asp\\profiles\\profile_fastest.lp",
+    "least_waiting": "asp\\profiles\\profile_least_waiting.lp",
+    "fewest_transfers": "asp\\profiles\\profile_fewest_transfers.lp",
+    "simple": "asp\\profiles\\profile_comfort.lp",
+    "balanced": "asp\\profiles\\profile_balanced.lp"
+  },
+  "e6_interpretation": "infrastructure robustness; not passenger transfer evidence"
+}

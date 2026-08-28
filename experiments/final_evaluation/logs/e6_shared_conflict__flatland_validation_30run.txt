@@ -1,0 +1,66 @@
+flatland version 1.0
+Reading from asp/custom/connection.lp ...
+Solving...
+Answer: 1
+action(train(0),wait,0) action(train(0),wait,1) action(train(0),wait,2) action(train(0),wait,3) action(train(1),wait,0) action(train(1),wait,1) action(train(1),wait,2) action(train(1),wait,3) action(train(1),wait,4) action(train(1),wait,5) action(train(1),wait,6) action(train(1),wait,7) action(train(0),move_forward,4) action(train(1),move_forward,8) action(train(0),wait,28) action(train(0),wait,40) action(train(1),move_right,11) action(train(0),move_right,10) action(train(0),move_right,15) action(train(1),move_right,24) action(train(1),move_right,27) action(train(0),move_right,33) action(train(0),move_right,42) action(train(1),move_left,10) action(train(1),move_left,22) action(train(1),move_left,26) action(train(0),move_left,37) action(train(0),move_left,41) action(train(0),move_forward,9) action(train(1),move_forward,14) action(train(0),move_forward,11) action(train(1),move_forward,15) action(train(1),move_forward,16) action(train(0),move_forward,12) action(train(0),move_forward,13) action(train(1),move_forward,17) action(train(1),move_forward,18) action(train(0),move_forward,14) action(train(1),move_forward,19) action(train(1),move_forward,20) action(train(0),move_forward,16) action(train(0),move_forward,17) action(train(1),move_forward,21) action(train(0),move_forward,18) action(train(0),move_forward,19) action(train(1),move_forward,23) action(train(0),move_forward,20) action(train(0),move_forward,21) action(train(1),move_forward,25) action(train(0),move_forward,22) action(train(0),move_forward,23) action(train(1),move_forward,28) action(train(0),move_forward,24) action(train(0),move_forward,25) action(train(1),move_forward,29) action(train(0),move_forward,26) action(train(0),move_forward,27) action(train(0),move_forward,29) action(train(0),move_forward,30) action(train(0),move_forward,31) action(train(0),move_forward,32) action(train(0),move_forward,34) action(train(0),move_forward,35) action(train(0),move_forward,36) action(train(0),move_forward,38) action(train(0),move_forward,39) action(train(0),move_forward,43) action(train(0),move_forward,5) action(train(1),move_forward,9) action(train(0),move_forward,6) action(train(0),move_forward,7) action(train(1),move_forward,12) action(train(0),move_forward,8) action(train(1),move_forward,13)
+Optimization: 544
+Answer: 2
+action(train(0),wait,0) action(train(0),wait,1) action(train(0),wait,2) action(train(0),wait,3) action(train(1),wait,0) action(train(1),wait,1) action(train(1),wait,2) action(train(1),wait,3) action(train(1),wait,4) action(train(1),wait,5) action(train(1),wait,6) action(train(1),wait,7) action(train(0),move_forward,4) action(train(1),move_forward,8) action(train(1),move_right,11) action(train(0),move_right,10) action(train(0),move_right,15) action(train(1),move_right,24) action(train(1),move_right,27) action(train(0),move_right,32) action(train(0),move_right,40) action(train(1),move_left,10) action(train(1),move_left,22) action(train(1),move_left,26) action(train(0),move_left,36) action(train(0),move_left,39) action(train(0),move_forward,9) action(train(1),move_forward,14) action(train(0),move_forward,11) action(train(1),move_forward,15) action(train(1),move_forward,16) action(train(0),move_forward,12) action(train(0),move_forward,13) action(train(1),move_forward,17) action(train(1),move_forward,18) action(train(0),move_forward,14) action(train(1),move_forward,19) action(train(1),move_forward,20) action(train(0),move_forward,16) action(train(0),move_forward,17) action(train(1),move_forward,21) action(train(0),move_forward,18) action(train(0),move_forward,19) action(train(1),move_forward,23) action(train(0),move_forward,20) action(train(0),move_forward,21) action(train(1),move_forward,25) action(train(0),move_forward,22) action(train(0),move_forward,23) action(train(1),move_forward,28) action(train(0),move_forward,24) action(train(0),move_forward,25) action(train(1),move_forward,29) action(train(0),move_forward,26) action(train(0),move_forward,27) action(train(0),move_forward,28) action(train(0),move_forward,29) action(train(0),move_forward,30) action(train(0),move_forward,31) action(train(0),move_forward,33) action(train(0),move_forward,34) action(train(0),move_forward,35) action(train(0),move_forward,37) action(train(0),move_forward,38) action(train(0),move_forward,41) action(train(0),move_forward,5) action(train(1),move_forward,9) action(train(0),move_forward,6) action(train(0),move_forward,7) action(train(1),move_forward,12) action(train(0),move_forward,8) action(train(1),move_forward,13)
+Optimization: 512
+OPTIMUM FOUND
+
+Models       : 2
+  Optimum    : yes
+Optimization : 512
+Calls        : 1
+Time         : 8.674s (Solving: 4.65s 1st Model: 0.14s Unsat: 3.98s)
+CPU Time     : 8.625s
+RS42_VALIDATION: PASS - ASP plan matched Flatland and all trains reached their targets.
+asp/custom/passenger_transfer.lp:31:5-17: info: atom does not occur in any rule head:
+  passenger(P)
+
+asp/custom/passenger_transfer.lp:32:5-26: info: atom does not occur in any rule head:
+  passenger_origin(#X0,#P1)
+
+asp/custom/passenger_transfer.lp:33:5-31: info: atom does not occur in any rule head:
+  passenger_destination(#X0,#P1)
+
+asp/custom/passenger_transfer.lp:36:5-17: info: atom does not occur in any rule head:
+  passenger(P)
+
+asp/custom/passenger_transfer.lp:43:5-30: info: atom does not occur in any rule head:
+  transfer_station(Station)
+
+asp/custom/passenger_transfer.lp:44:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train1,Order1)
+
+asp/custom/passenger_transfer.lp:45:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train2,Order2)
+
+asp/custom/passenger_transfer.lp:92:4-30: info: atom does not occur in any rule head:
+  passenger_origin(P,Origin)
+
+asp/custom/passenger_transfer.lp:97:4-40: info: atom does not occur in any rule head:
+  passenger_destination(P,Destination)
+
+asp/custom/waypoint.lp:13:5-28: info: atom does not occur in any rule head:
+  must_visit(ID,Station)
+
+asp/custom/waypoint.lp:14:5-29: info: atom does not occur in any rule head:
+  station(Station,ID,WP)
+
+asp/custom/waypoint.lp:18:5-36: info: atom does not occur in any rule head:
+  flatland_waypoint(ID,WP,X,Y)
+
+asp/custom/waypoint.lp:21:5-29: info: atom does not occur in any rule head:
+  station(Station,ID,WP)
+
+asp/custom/waypoint.lp:26:5-29: info: atom does not occur in any rule head:
+  station(Station,ID,WP)
+
+asp/custom/waypoint.lp:39:4-27: info: atom does not occur in any rule head:
+  must_visit(ID,Station)
+
+asp/custom/waypoint.lp:42:4-29: info: atom does not occur in any rule head:
+  station_order(ID,S1,S2)
+

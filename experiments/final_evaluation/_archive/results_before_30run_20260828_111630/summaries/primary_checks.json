@@ -1,0 +1,94 @@
+{
+  "checks": [
+    {
+      "name": "E1 Fastest selects known fast service",
+      "environment": "e1_fast_slow",
+      "description": "The controlled E1 fast service is Train 0 with passenger journey time 10.",
+      "observed_journey_time": 10,
+      "observed_selected_trains": "0",
+      "expected_journey_time": 10,
+      "expected_train": 0,
+      "pass": true
+    },
+    {
+      "name": "E2 fastest uses more transfers",
+      "environment": "e2_transfer_network",
+      "description": "Fastest should accept more transfers than Fewer Transfers.",
+      "left_profile": "fastest",
+      "left_metric": "transfers",
+      "left_value": 2,
+      "operator": ">",
+      "right_profile": "fewest_transfers",
+      "right_metric": "transfers",
+      "right_value": 0,
+      "pass": true
+    },
+    {
+      "name": "E2 fastest is quicker",
+      "environment": "e2_transfer_network",
+      "description": "The multi-transfer Fastest itinerary should be quicker.",
+      "left_profile": "fastest",
+      "left_metric": "journey_time",
+      "left_value": 14,
+      "operator": "<",
+      "right_profile": "fewest_transfers",
+      "right_metric": "journey_time",
+      "right_value": 18,
+      "pass": true
+    },
+    {
+      "name": "E3 fastest is quicker",
+      "environment": "e3_waiting_network",
+      "description": "Fastest should select the lower total journey time.",
+      "left_profile": "fastest",
+      "left_metric": "journey_time",
+      "left_value": 11,
+      "operator": "<",
+      "right_profile": "least_waiting",
+      "right_metric": "journey_time",
+      "right_value": 13,
+      "pass": true
+    },
+    {
+      "name": "E3 less-waiting reduces wait",
+      "environment": "e3_waiting_network",
+      "description": "Less Waiting should reduce connection waiting.",
+      "left_profile": "least_waiting",
+      "left_metric": "transfer_wait",
+      "left_value": 1,
+      "operator": "<",
+      "right_profile": "fastest",
+      "right_metric": "transfer_wait",
+      "right_value": 5,
+      "pass": true
+    },
+    {
+      "name": "E4 fastest is quicker",
+      "environment": "e4_simple_complex",
+      "description": "Fastest should choose the shorter route.",
+      "left_profile": "fastest",
+      "left_metric": "journey_time",
+      "left_value": 32,
+      "operator": "<",
+      "right_profile": "simple",
+      "right_metric": "journey_time",
+      "right_value": 41,
+      "pass": true
+    },
+    {
+      "name": "E4 simple uses fewer turns",
+      "environment": "e4_simple_complex",
+      "description": "Simple Journey should choose a lower-turn route.",
+      "left_profile": "simple",
+      "left_metric": "turns",
+      "left_value": 4,
+      "operator": "<",
+      "right_profile": "fastest",
+      "right_metric": "turns",
+      "right_value": 8,
+      "pass": true
+    }
+  ],
+  "passed": 7,
+  "total": 7
+}

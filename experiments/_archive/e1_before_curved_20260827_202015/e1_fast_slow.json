@@ -1,0 +1,17 @@
+{
+  "environment": "e1_fast_slow",
+  "geometry_version": "curved_final",
+  "fast": {
+    "steps": 10,
+    "turns": 2
+  },
+  "slow": {
+    "steps": 18,
+    "turns": 2
+  },
+  "verification": {
+    "status": "OPTIMUM FOUND",
+    "fastest_train": 0,
+    "journey_time": 10
+  }
+}

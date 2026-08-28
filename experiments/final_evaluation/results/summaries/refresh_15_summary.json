@@ -1,0 +1,18 @@
+{
+  "fresh_runs": 15,
+  "optimum_found": 15,
+  "failures": [],
+  "final_merge_performed": true,
+  "final_rows": 30,
+  "refreshed_environments": [
+    "e1_fast_slow",
+    "e2_transfer_network",
+    "e3_waiting_network"
+  ],
+  "frozen_environments": [
+    "e4_simple_complex",
+    "e5_mixed_preferences",
+    "e6_shared_conflict"
+  ],
+  "test02_level8_note": "Supplementary Test_02 Level_8 E5 attempt timed out after 300 seconds under the current ASP formulation."
+}

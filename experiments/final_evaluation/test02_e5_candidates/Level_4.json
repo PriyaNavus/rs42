@@ -1,0 +1,317 @@
+{
+  "source": "benchmarks\\environments\\Test_02\\Level_4.pkl",
+  "width": 30,
+  "height": 30,
+  "rail_cells": 154,
+  "number_of_trains": 20,
+  "max_episode_steps": 349,
+  "trains": [
+    {
+      "train": 0,
+      "start": [
+        18,
+        6
+      ],
+      "target": [
+        19,
+        16
+      ],
+      "direction": 2,
+      "earliest_departure": 62,
+      "latest_arrival": 177,
+      "speed": 0.33
+    },
+    {
+      "train": 1,
+      "start": [
+        16,
+        16
+      ],
+      "target": [
+        18,
+        7
+      ],
+      "direction": 3,
+      "earliest_departure": 59,
+      "latest_arrival": 166,
+      "speed": 0.33
+    },
+    {
+      "train": 2,
+      "start": [
+        16,
+        16
+      ],
+      "target": [
+        6,
+        6
+      ],
+      "direction": 3,
+      "earliest_departure": 159,
+      "latest_arrival": 317,
+      "speed": 0.33
+    },
+    {
+      "train": 3,
+      "start": [
+        6,
+        5
+      ],
+      "target": [
+        19,
+        16
+      ],
+      "direction": 2,
+      "earliest_departure": 198,
+      "latest_arrival": 309,
+      "speed": 0.5
+    },
+    {
+      "train": 4,
+      "start": [
+        16,
+        16
+      ],
+      "target": [
+        6,
+        6
+      ],
+      "direction": 1,
+      "earliest_departure": 28,
+      "latest_arrival": 220,
+      "speed": 0.25
+    },
+    {
+      "train": 5,
+      "start": [
+        6,
+        5
+      ],
+      "target": [
+        19,
+        16
+      ],
+      "direction": 2,
+      "earliest_departure": 230,
+      "latest_arrival": 296,
+      "speed": 1.0
+    },
+    {
+      "train": 6,
+      "start": [
+        18,
+        6
+      ],
+      "target": [
+        6,
+        6
+      ],
+      "direction": 2,
+      "earliest_departure": 192,
+      "latest_arrival": 281,
+      "speed": 1.0
+    },
+    {
+      "train": 7,
+      "start": [
+        6,
+        5
+      ],
+      "target": [
+        18,
+        5
+      ],
+      "direction": 0,
+      "earliest_departure": 95,
+      "latest_arrival": 287,
+      "speed": 0.25
+    },
+    {
+      "train": 8,
+      "start": [
+        18,
+        16
+      ],
+      "target": [
+        18,
+        7
+      ],
+      "direction": 1,
+      "earliest_departure": 35,
+      "latest_arrival": 308,
+      "speed": 0.33
+    },
+    {
+      "train": 9,
+      "start": [
+        18,
+        4
+      ],
+      "target": [
+        17,
+        16
+      ],
+      "direction": 0,
+      "earliest_departure": 53,
+      "latest_arrival": 102,
+      "speed": 1.0
+    },
+    {
+      "train": 10,
+      "start": [
+        6,
+        5
+      ],
+      "target": [
+        18,
+        5
+      ],
+      "direction": 2,
+      "earliest_departure": 139,
+      "latest_arrival": 211,
+      "speed": 0.33
+    },
+    {
+      "train": 11,
+      "start": [
+        18,
+        4
+      ],
+      "target": [
+        6,
+        6
+      ],
+      "direction": 2,
+      "earliest_departure": 17,
+      "latest_arrival": 323,
+      "speed": 0.25
+    },
+    {
+      "train": 12,
+      "start": [
+        16,
+        16
+      ],
+      "target": [
+        6,
+        6
+      ],
+      "direction": 1,
+      "earliest_departure": 42,
+      "latest_arrival": 234,
+      "speed": 0.25
+    },
+    {
+      "train": 13,
+      "start": [
+        6,
+        5
+      ],
+      "target": [
+        19,
+        16
+      ],
+      "direction": 0,
+      "earliest_departure": 3,
+      "latest_arrival": 299,
+      "speed": 0.25
+    },
+    {
+      "train": 14,
+      "start": [
+        18,
+        16
+      ],
+      "target": [
+        18,
+        7
+      ],
+      "direction": 3,
+      "earliest_departure": 5,
+      "latest_arrival": 112,
+      "speed": 0.33
+    },
+    {
+      "train": 15,
+      "start": [
+        18,
+        4
+      ],
+      "target": [
+        17,
+        16
+      ],
+      "direction": 2,
+      "earliest_departure": 164,
+      "latest_arrival": 309,
+      "speed": 0.25
+    },
+    {
+      "train": 16,
+      "start": [
+        18,
+        16
+      ],
+      "target": [
+        6,
+        6
+      ],
+      "direction": 3,
+      "earliest_departure": 169,
+      "latest_arrival": 327,
+      "speed": 0.33
+    },
+    {
+      "train": 17,
+      "start": [
+        6,
+        5
+      ],
+      "target": [
+        19,
+        16
+      ],
+      "direction": 2,
+      "earliest_departure": 23,
+      "latest_arrival": 225,
+      "speed": 0.25
+    },
+    {
+      "train": 18,
+      "start": [
+        6,
+        5
+      ],
+      "target": [
+        17,
+        16
+      ],
+      "direction": 2,
+      "earliest_departure": 10,
+      "latest_arrival": 73,
+      "speed": 1.0
+    },
+    {
+      "train": 19,
+      "start": [
+        16,
+        16
+      ],
+      "target": [
+        6,
+        6
+      ],
+      "direction": 1,
+      "earliest_departure": 43,
+      "latest_arrival": 149,
+      "speed": 0.5
+    }
+  ],
+  "env_dict_keys": [
+    "agents",
+    "grid",
+    "malfunction",
+    "max_episode_steps"
+  ],
+  "preview": "failed: [Errno 2] No such file or directory: 'C:\\\\Users\\\\priya\\\\OneDrive\\\\Desktop\\\\CogSys\\\\Railway Scheduling\\\\rs42\\\\experiments\\\\final_evaluation\\\\test02_e5_candidates\\\\previews\\\\png/Level_4.png'"
+}

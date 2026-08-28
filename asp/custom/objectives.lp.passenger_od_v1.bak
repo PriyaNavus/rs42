@@ -1,0 +1,123 @@
+% ============================================================
+% objectives.lp
+% RS42 optimization policies.
+%
+% Exactly one objective_mode/1 fact must be supplied by
+% asp/profiles/active_profile.lp.
+%
+% Higher @ priorities are optimized first by clingo.
+% Named profiles are lexicographic:
+%   - fastest:          travel time first
+%   - least_waiting:    in-journey waiting first
+%   - fewest_transfers: transfer count first
+%   - simple:           route turns first
+%
+% weighted is used for Balanced and Custom profiles.
+% ============================================================
+
+known_objective_mode(weighted).
+known_objective_mode(fastest).
+known_objective_mode(least_waiting).
+known_objective_mode(fewest_transfers).
+known_objective_mode(simple).
+
+% Require exactly one supported mode.
+:- not objective_mode(_).
+:- objective_mode(M), not known_objective_mode(M).
+:- objective_mode(M1), objective_mode(M2), M1 != M2.
+
+% ------------------------------------------------------------
+% FASTEST
+% Primary: journey duration.
+% Tie-breakers: waiting, transfers, turns, intermediate timing.
+% ------------------------------------------------------------
+
+#minimize {
+    T@5,ID : travel_time(ID,T), objective_mode(fastest)
+}.
+#minimize {
+    W@4,ID : waiting_time(ID,W), objective_mode(fastest)
+}.
+#minimize {
+    N@3,P : transfer_count(P,N), objective_mode(fastest)
+}.
+#minimize {
+    N@2,ID : turns(ID,N), objective_mode(fastest)
+}.
+#minimize {
+    T@1,ID : waypoint_time(ID,T), objective_mode(fastest)
+}.
+
+% ------------------------------------------------------------
+% LEAST WAITING
+% Primary: in-journey waiting.
+% ------------------------------------------------------------
+
+#minimize {
+    W@5,ID : waiting_time(ID,W), objective_mode(least_waiting)
+}.
+#minimize {
+    T@4,ID : travel_time(ID,T), objective_mode(least_waiting)
+}.
+#minimize {
+    N@3,P : transfer_count(P,N), objective_mode(least_waiting)
+}.
+#minimize {
+    N@2,ID : turns(ID,N), objective_mode(least_waiting)
+}.
+#minimize {
+    T@1,ID : waypoint_time(ID,T), objective_mode(least_waiting)
+}.
+
+% ------------------------------------------------------------
+% FEWEST TRANSFERS
+% Primary: passenger transfer count.
+% ------------------------------------------------------------
+
+#minimize {
+    N@5,P : transfer_count(P,N), objective_mode(fewest_transfers)
+}.
+#minimize {
+    T@4,ID : travel_time(ID,T), objective_mode(fewest_transfers)
+}.
+#minimize {
+    W@3,ID : waiting_time(ID,W), objective_mode(fewest_transfers)
+}.
+#minimize {
+    N@2,ID : turns(ID,N), objective_mode(fewest_transfers)
+}.
+#minimize {
+    T@1,ID : waypoint_time(ID,T), objective_mode(fewest_transfers)
+}.
+
+% ------------------------------------------------------------
+% SIMPLE JOURNEY
+% Primary: number of directional turns.
+% ------------------------------------------------------------
+
+#minimize {
+    N@5,ID : turns(ID,N), objective_mode(simple)
+}.
+#minimize {
+    T@4,ID : travel_time(ID,T), objective_mode(simple)
+}.
+#minimize {
+    W@3,ID : waiting_time(ID,W), objective_mode(simple)
+}.
+#minimize {
+    N@2,P : transfer_count(P,N), objective_mode(simple)
+}.
+#minimize {
+    T@1,ID : waypoint_time(ID,T), objective_mode(simple)
+}.
+
+% ------------------------------------------------------------
+% WEIGHTED
+% Balanced / Custom preserve the original weighted-sum idea.
+% ------------------------------------------------------------
+
+#minimize {
+    C@1,Entity,Type :
+        cost(Entity,Type,C),
+        objective_mode(weighted)
+}.

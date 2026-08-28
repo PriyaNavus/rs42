@@ -1,0 +1,38 @@
+{
+  "Solver": "pyclingo version 5.6.1",
+  "Input": [
+    "C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\envs\\lp\\e1_fast_slow.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\connection.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\encoding.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\waypoint.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\passenger_transfer.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\visual.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\custom\\objectives.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\profiles\\profile_least_waiting.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\asp\\scenarios\\e1_fast_slow.lp","C:\\Users\\priya\\OneDrive\\Desktop\\CogSys\\Railway Scheduling\\rs42\\experiments\\final_evaluation\\configs\\runtime\\metric_collector_30run.lp"
+  ],
+  "Call": [
+    {
+      "Witnesses": [
+        {
+          "Value": [
+            "visited_station(0,origin)", "visited_station(1,origin)", "action(train(0),wait,0)", "action(train(1),wait,0)", "action(train(0),move_forward,1)", "action(train(1),move_forward,1)", "first_station_visit(0,origin,2)", "first_station_visit(1,origin,2)", "passenger_transfer_wait(p1,0)", "transfer_count(p1,0)", "first_station_visit(0,destination,12)", "first_station_visit(1,destination,20)", "journey_length(p1,1)", "chosen_leg(p1,1,0,origin,destination,2,12)", "passenger_journey_time(p1,10)", "travel_time(0,10)", "travel_time(1,18)", "waiting_time(0,0)", "waiting_time(1,0)", "passenger_uses_train(p1,0)", "action(train(0),move_right,6)", "action(train(1),move_right,8)", "action(train(0),move_left,8)", "action(train(1),move_left,12)", "turns(0,2)", "turns(1,2)", "waypoint_time(0,14)", "waypoint_time(1,22)", "visited_station(0,destination)", "visited_station(1,destination)", "action(train(0),move_forward,2)", "action(train(1),move_forward,2)", "action(train(1),move_forward,3)", "action(train(0),move_forward,3)", "action(train(0),move_forward,4)", "action(train(1),move_forward,4)", "action(train(1),move_forward,5)", "action(train(0),move_forward,5)", "action(train(1),move_forward,6)", "action(train(1),move_forward,7)", "action(train(0),move_forward,7)", "action(train(1),move_forward,9)", "action(train(0),move_forward,9)", "action(train(0),move_forward,10)", "action(train(1),move_forward,10)", "action(train(1),move_forward,11)", "action(train(0),move_forward,11)", "action(train(1),move_forward,13)", "action(train(1),move_forward,14)", "action(train(1),move_forward,15)", "action(train(1),move_forward,16)", "action(train(1),move_forward,17)", "action(train(1),move_forward,18)", "action(train(1),move_forward,19)"
+          ],
+          "Costs": [
+            0, 10, 0, 2, 36
+          ]
+        }
+      ]
+    }
+  ],
+  "Result": "OPTIMUM FOUND",
+  "Models": {
+    "Number": 1,
+    "More": "no",
+    "Optimum": "yes",
+    "Optimal": 1,
+    "Costs": [
+      0, 10, 0, 2, 36
+    ]
+  },
+  "Calls": 1,
+  "Time": {
+    "Total": 7.911,
+    "Solve": 0.087,
+    "Model": 0.009,
+    "Unsat": 0.077,
+    "CPU": 7.172
+  }
+}

@@ -1,0 +1,7 @@
+environment,environment_label,evaluation_role,validation,runtime_seconds,returncode,log
+e1_fast_slow,E1 - Fast vs Slow,controlled_preference,PASS,13.708,0,experiments\final_evaluation\logs\e1_fast_slow__flatland_validation_30run.txt
+e2_transfer_network,E2 - Transfer Network,controlled_preference,PASS,59.339,0,experiments\final_evaluation\logs\e2_transfer_network__flatland_validation_30run.txt
+e3_waiting_network,E3 - Waiting Network,controlled_preference,PASS,38.821,0,experiments\final_evaluation\logs\e3_waiting_network__flatland_validation_30run.txt
+e4_simple_complex,E4 - Simple vs Complex,controlled_preference,PASS,4.481,0,experiments\final_evaluation\logs\e4_simple_complex__flatland_validation_30run.txt
+e5_mixed_preferences,E5 - Mixed Preferences,integrated_preference,PASS,64.855,0,experiments\final_evaluation\logs\e5_mixed_preferences__flatland_validation_30run.txt
+e6_shared_conflict,E6 - Infrastructure Robustness,infrastructure_robustness,PASS,11.634,0,experiments\final_evaluation\logs\e6_shared_conflict__flatland_validation_30run.txt

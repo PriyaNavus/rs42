@@ -1,0 +1,18 @@
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:32:5-26: info: atom does not occur in any rule head:
+  passenger_origin(#X0,#P1)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:33:5-31: info: atom does not occur in any rule head:
+  passenger_destination(#X0,#P1)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:92:4-30: info: atom does not occur in any rule head:
+  passenger_origin(P,Origin)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:97:4-40: info: atom does not occur in any rule head:
+  passenger_destination(P,Destination)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\experiments\final_evaluation\configs\runtime\metric_collector.lp:8:1-19: info: no atoms over signature occur in program:
+  wait_time/2
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\experiments\final_evaluation\configs\runtime\metric_collector.lp:10:1-23: info: no atoms over signature occur in program:
+  waypoint_cost/2
+

@@ -1,0 +1,115 @@
+% ============================================================
+% visual.lp
+% RS42 outcome metrics.
+%
+% This file DEFINES metrics only.
+% Optimization policy is separated into asp/custom/objectives.lp.
+% ============================================================
+
+% -----------------------------
+% Absolute arrival time
+% -----------------------------
+
+arrival(ID,T) :-
+    reached(ID,T),
+    not reached(ID,T-1),
+    T > 0.
+
+arrival(ID,0) :-
+    reached(ID,0).
+
+% -----------------------------
+% Journey / travel duration
+% -----------------------------
+% Flatland's current spawn convention places a train on its start
+% cell at release_time + 2.  Subtract that fixed simulator overhead
+% so this metric represents the on-map journey duration.
+
+travel_time(ID,D) :-
+    arrival(ID,A),
+    start(ID,_,Release,_),
+    D = A - Release - 2.
+
+% -----------------------------
+% In-journey waiting
+% -----------------------------
+% pos(...) excludes forced waits before the train exists on the map.
+
+waiting_time(ID,N) :-
+    train(ID),
+    N = #count {
+        T : action(train(ID), wait, T),
+            pos(ID,_,_,_,T),
+            not reached(ID,T)
+    }.
+
+% -----------------------------
+% Route complexity: directional turns
+% -----------------------------
+
+left_turns(ID,L) :-
+    train(ID),
+    L = #count { T : action(train(ID), move_left, T) }.
+
+right_turns(ID,R) :-
+    train(ID),
+    R = #count { T : action(train(ID), move_right, T) }.
+
+turns(ID,N) :-
+    left_turns(ID,L),
+    right_turns(ID,R),
+    N = L + R.
+
+% -----------------------------
+% Intermediate waypoint timing
+% -----------------------------
+
+visited_waypoint_at(ID,WP,T) :-
+    waypoint(ID,WP,X,Y),
+    pos(ID,X,Y,_,T).
+
+visited_waypoint_before(ID,WP,T) :-
+    visited_waypoint_at(ID,WP,T),
+    visited_waypoint_at(ID,WP,T1),
+    T1 < T.
+
+first_waypoint_visit(ID,WP,T) :-
+    visited_waypoint_at(ID,WP,T),
+    not visited_waypoint_before(ID,WP,T).
+
+waypoint_time(ID,Total) :-
+    train(ID),
+    Total = #sum {
+        T,WP : first_waypoint_visit(ID,WP,T)
+    }.
+
+waypoint_time(ID,0) :-
+    train(ID),
+    not waypoint(ID,_,_,_).
+
+% -----------------------------
+% Weighted costs
+% Used only by weighted (Balanced / Custom) optimization.
+% -----------------------------
+
+cost(ID,travel,C) :-
+    travel_time(ID,T),
+    C = T * w_arrival.
+
+cost(ID,waiting,C) :-
+    waiting_time(ID,T),
+    C = T * w_wait.
+
+cost(ID,waypoint,C) :-
+    waypoint_time(ID,T),
+    C = T * w_waypoint.
+
+cost(ID,turns,C) :-
+    turns(ID,T),
+    C = T * w_turn.
+
+cost(P,transfer,C) :-
+    transfer_count(P,N),
+    C = N * w_transfer.
+
+#show action/3.

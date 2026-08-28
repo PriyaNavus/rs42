@@ -1,0 +1,5 @@
+environment,validation,runtime_seconds,returncode,log
+e1_fast_slow,FAIL,2.121,1,experiments\final_evaluation\logs\e1_fast_slow__flatland_validation.txt
+e2_transfer_network,FAIL,2.051,1,experiments\final_evaluation\logs\e2_transfer_network__flatland_validation.txt
+e3_waiting_network,FAIL,1.928,1,experiments\final_evaluation\logs\e3_waiting_network__flatland_validation.txt
+e4_simple_complex,PASS,3.625,0,experiments\final_evaluation\logs\e4_simple_complex__flatland_validation.txt

@@ -1,0 +1,69 @@
+from pathlib import Path
+import shutil
+from datetime import datetime
+
+ROOT = Path.cwd().resolve()
+
+if not (ROOT / "solve.py").exists():
+    raise SystemExit(
+        "ERROR: Run this installer from the RS42 repository root."
+    )
+
+TARGET = (
+    ROOT
+    / "tools"
+    / "final_evaluation"
+    / "build_e5_mixed_preferences.py"
+)
+
+if TARGET.exists():
+    stamp = datetime.now().strftime(
+        "%Y%m%d_%H%M%S"
+    )
+
+    backup = TARGET.with_name(
+        "build_e5_before_final_restore_{}.py"
+        .format(stamp)
+    )
+
+    shutil.copy2(
+        str(TARGET),
+        str(backup),
+    )
+
+    print(
+        "Backup:",
+        backup.relative_to(ROOT),
+    )
+
+BUILDER = '"""\nRS42 E5 — Final Frozen Mixed Preference Network.\n\nThis is the previously validated E5 configuration.\n\nImportant:\n- Do not enlarge this environment again.\n- The builder only constructs and saves the environment.\n- Profile optimization belongs in the final evaluation runner, not here.\n\nPreviously validated passenger outcomes:\nFastest         -> journey 14, wait 2, transfers 2\nLess Waiting    -> journey 18, wait 0, transfers 0\nFewer Transfers -> journey 18, wait 0, transfers 0\nSimple Journey  -> journey 16, wait 1, transfers 1\nBalanced        -> journey 18, wait 0, transfers 0\n"""\n\nfrom __future__ import annotations\n\nimport argparse\nimport json\nimport pickle\nimport sys\nfrom pathlib import Path\n\nROOT = Path(__file__).resolve().parents[2]\n\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\n\nfrom modules.convert import convert_to_clingo\nfrom modules.save import save_png\n\nfrom flatland.envs.rail_generators import rail_from_grid_transition_map\nfrom flatland.envs.rail_env import RailEnv\nfrom flatland.envs.observations import GlobalObsForRailEnv\nfrom flatland.envs.malfunction_generators import (\n    MalfunctionParameters,\n    ParamMalfunctionGen,\n)\n\nfrom tools.final_evaluation.evaluation_generators import (\n    EvaluationLineGenerator,\n)\n\nfrom tools.final_evaluation.final_eval_rail_geometry import (\n    build_disjoint_rail,\n    initial_direction,\n    manhattan_path,\n    route_steps,\n    route_turns,\n)\n\n\nSTEM = "e5_mixed_preferences"\n\nWIDTH = 20\nHEIGHT = 24\nHORIZON = 22\n\n\n# ----------------------------------------------------------------------\n# EXACT PREVIOUSLY VALIDATED E5 GEOMETRY\n# ----------------------------------------------------------------------\n\nDIRECT = manhattan_path([\n    (2, 0),\n    (2, 6),\n    (4, 6),\n    (4, 12),\n    (2, 12),\n    (2, 16),\n])\n\nFAST1 = manhattan_path([\n    (7, 0),\n    (7, 2),\n    (6, 2),\n    (6, 5),\n])\n\nFAST2 = manhattan_path([\n    (9, 4),\n    (9, 6),\n    (10, 6),\n    (10, 9),\n])\n\nFAST3 = manhattan_path([\n    (12, 8),\n    (12, 10),\n    (11, 10),\n    (11, 13),\n])\n\nCOMP1 = manhattan_path([\n    (18, 0),\n    (18, 4),\n    (16, 4),\n    (16, 7),\n])\n\nCOMP2 = manhattan_path([\n    (22, 6),\n    (22, 10),\n    (20, 10),\n    (20, 14),\n])\n\n\nPATHS = [\n    DIRECT,\n    FAST1,\n    FAST2,\n    FAST3,\n    COMP1,\n    COMP2,\n]\n\n\nSTARTS = [\n    (2, 1),\n    (7, 1),\n    (9, 5),\n    (12, 9),\n    (18, 1),\n    (22, 7),\n]\n\n\nTARGETS = [\n    (2, 15),\n    (6, 4),\n    (10, 8),\n    (11, 12),\n    (16, 6),\n    (20, 13),\n]\n\n\nRELEASES = [\n    0,\n    0,\n    5,\n    10,\n    0,\n    8,\n]\n\n\nSTEPS = [\n    route_steps(path, start, target)\n    for path, start, target\n    in zip(PATHS, STARTS, TARGETS)\n]\n\n\nTURNS = [\n    route_turns(path, start, target)\n    for path, start, target\n    in zip(PATHS, STARTS, TARGETS)\n]\n\n\nOUT_PKL = (\n    ROOT\n    / "envs"\n    / "pkl"\n    / f"{STEM}.pkl"\n)\n\nOUT_LP = (\n    ROOT\n    / "envs"\n    / "lp"\n    / f"{STEM}.lp"\n)\n\nOUT_PNG = (\n    ROOT\n    / "envs"\n    / "png"\n    / f"{STEM}.png"\n)\n\nOUT_SCENARIO = (\n    ROOT\n    / "asp"\n    / "scenarios"\n    / f"{STEM}.lp"\n)\n\nOUT_META = (\n    ROOT\n    / "experiments"\n    / "final_evaluation"\n    / "configs"\n    / f"{STEM}.json"\n)\n\n\ndef parse_args():\n    parser = argparse.ArgumentParser()\n\n    parser.add_argument(\n        "--overwrite",\n        action="store_true",\n    )\n\n    return parser.parse_args()\n\n\ndef validate_geometry():\n    if STEPS != [\n        18,\n        4,\n        4,\n        4,\n        7,\n        8,\n    ]:\n        raise RuntimeError(\n            "Unexpected E5 movement lengths: {}"\n            .format(STEPS)\n        )\n\n    # The original validated setup has:\n    # direct = 4 turns\n    # fast legs = 2 each\n    # compromise legs = 2 each\n    if TURNS != [\n        4,\n        2,\n        2,\n        2,\n        2,\n        2,\n    ]:\n        raise RuntimeError(\n            "Unexpected E5 turn counts: {}"\n            .format(TURNS)\n        )\n\n    # Confirm start/target cells are internal to every path.\n    for index, (\n        path,\n        start,\n        target,\n    ) in enumerate(\n        zip(\n            PATHS,\n            STARTS,\n            TARGETS,\n        )\n    ):\n        start_i = path.index(start)\n        target_i = path.index(target)\n\n        if start_i <= 0:\n            raise RuntimeError(\n                "Route {} start is not internal."\n                .format(index)\n            )\n\n        if target_i >= len(path) - 1:\n            raise RuntimeError(\n                "Route {} target is not internal."\n                .format(index)\n            )\n\n\ndef build_environment():\n    rail = build_disjoint_rail(\n        WIDTH,\n        HEIGHT,\n        {\n            "direct": DIRECT,\n            "fast1": FAST1,\n            "fast2": FAST2,\n            "fast3": FAST3,\n            "comp1": COMP1,\n            "comp2": COMP2,\n        },\n    )\n\n    env = RailEnv(\n        width=WIDTH,\n        height=HEIGHT,\n        rail_generator=rail_from_grid_transition_map(\n            rail\n        ),\n        line_generator=EvaluationLineGenerator(\n            positions=STARTS,\n            directions=[\n                initial_direction(\n                    path,\n                    start,\n                )\n                for path, start\n                in zip(\n                    PATHS,\n                    STARTS,\n                )\n            ],\n            targets=TARGETS,\n            speeds=[1.0] * 6,\n        ),\n        number_of_agents=6,\n        obs_builder_object=GlobalObsForRailEnv(),\n        malfunction_generator=ParamMalfunctionGen(\n            MalfunctionParameters(\n                0.0,\n                0,\n                0,\n            )\n        ),\n        remove_agents_at_target=True,\n        random_seed=42,\n    )\n\n    env.reset(\n        random_seed=42\n    )\n\n    env._max_episode_steps = HORIZON\n\n    for agent, release, steps in zip(\n        env.agents,\n        RELEASES,\n        STEPS,\n    ):\n        agent.earliest_departure = release\n\n        try:\n            agent.latest_arrival = (\n                release\n                + 2\n                + steps\n            )\n        except Exception:\n            pass\n\n    return env\n\n\ndef scenario_text():\n    coords = list(\n        zip(\n            STARTS,\n            TARGETS,\n        )\n    )\n\n    return f"""% RS42 E5 - Frozen Validated Mixed Preference Network\n\n% Direct Train 0\nflatland_waypoint(0,wp_d_o,{coords[0][0][0]},{coords[0][0][1]}).\nflatland_waypoint(0,wp_d_d,{coords[0][1][0]},{coords[0][1][1]}).\nstation(origin,0,wp_d_o).\nstation(destination,0,wp_d_d).\nmust_visit(0,origin).\nmust_visit(0,destination).\nstation_order(0,origin,destination).\n\n% Fast route: Train 1 -> Train 2 -> Train 3\nflatland_waypoint(1,wp_f1_o,{coords[1][0][0]},{coords[1][0][1]}).\nflatland_waypoint(1,wp_f1_b,{coords[1][1][0]},{coords[1][1][1]}).\nstation(origin,1,wp_f1_o).\nstation(station_b,1,wp_f1_b).\nmust_visit(1,origin).\nmust_visit(1,station_b).\nstation_order(1,origin,station_b).\n\nflatland_waypoint(2,wp_f2_b,{coords[2][0][0]},{coords[2][0][1]}).\nflatland_waypoint(2,wp_f2_c,{coords[2][1][0]},{coords[2][1][1]}).\nstation(station_b,2,wp_f2_b).\nstation(station_c,2,wp_f2_c).\nmust_visit(2,station_b).\nmust_visit(2,station_c).\nstation_order(2,station_b,station_c).\n\nflatland_waypoint(3,wp_f3_c,{coords[3][0][0]},{coords[3][0][1]}).\nflatland_waypoint(3,wp_f3_d,{coords[3][1][0]},{coords[3][1][1]}).\nstation(station_c,3,wp_f3_c).\nstation(destination,3,wp_f3_d).\nmust_visit(3,station_c).\nmust_visit(3,destination).\nstation_order(3,station_c,destination).\n\n% Compromise route: Train 4 -> Train 5\nflatland_waypoint(4,wp_c1_o,{coords[4][0][0]},{coords[4][0][1]}).\nflatland_waypoint(4,wp_c1_h,{coords[4][1][0]},{coords[4][1][1]}).\nstation(origin,4,wp_c1_o).\nstation(station_h,4,wp_c1_h).\nmust_visit(4,origin).\nmust_visit(4,station_h).\nstation_order(4,origin,station_h).\n\nflatland_waypoint(5,wp_c2_h,{coords[5][0][0]},{coords[5][0][1]}).\nflatland_waypoint(5,wp_c2_d,{coords[5][1][0]},{coords[5][1][1]}).\nstation(station_h,5,wp_c2_h).\nstation(destination,5,wp_c2_d).\nmust_visit(5,station_h).\nmust_visit(5,destination).\nstation_order(5,station_h,destination).\n\npassenger(p1).\npassenger_origin(p1,origin).\npassenger_destination(p1,destination).\n\n% Fixed service timetable.\n%\n% Direct:\n%   2 -> 20\n%   journey 18\n%   wait 0\n%   transfers 0\n%\n% Fast:\n%   2 -> 6\n%   7 -> 11\n%   12 -> 16\n%   journey 14\n%   wait 2\n%   transfers 2\n%\n% Compromise:\n%   2 -> 9\n%   10 -> 18\n%   journey 16\n%   wait 1\n%   transfers 1\n\n:- first_station_visit(0,origin,T), T != 2.\n:- first_station_visit(0,destination,T), T != 20.\n\n:- first_station_visit(1,origin,T), T != 2.\n:- first_station_visit(1,station_b,T), T != 6.\n\n:- first_station_visit(2,station_b,T), T != 7.\n:- first_station_visit(2,station_c,T), T != 11.\n\n:- first_station_visit(3,station_c,T), T != 12.\n:- first_station_visit(3,destination,T), T != 16.\n\n:- first_station_visit(4,origin,T), T != 2.\n:- first_station_visit(4,station_h,T), T != 9.\n\n:- first_station_visit(5,station_h,T), T != 10.\n:- first_station_visit(5,destination,T), T != 18.\n"""\n\n\ndef save_outputs(\n    env,\n    env_lp_text,\n    scenario,\n):\n    for path in [\n        OUT_PKL,\n        OUT_LP,\n        OUT_PNG,\n        OUT_SCENARIO,\n        OUT_META,\n    ]:\n        path.parent.mkdir(\n            parents=True,\n            exist_ok=True,\n        )\n\n    with OUT_PKL.open(\n        "wb"\n    ) as handle:\n        pickle.dump(\n            env,\n            handle,\n            protocol=pickle.HIGHEST_PROTOCOL,\n        )\n\n    OUT_LP.write_text(\n        env_lp_text,\n        encoding="utf-8",\n    )\n\n    OUT_SCENARIO.write_text(\n        scenario,\n        encoding="utf-8",\n    )\n\n    OUT_META.write_text(\n        json.dumps(\n            {\n                "environment": STEM,\n                "status": "FROZEN_VALIDATED_CONFIGURATION",\n                "purpose": (\n                    "integrated mixed-preference "\n                    "passenger experiment"\n                ),\n                "movement_steps": STEPS,\n                "route_turns": TURNS,\n                "validated_reference_results": {\n                    "fastest": {\n                        "journey": 14,\n                        "wait": 2,\n                        "transfers": 2,\n                    },\n                    "least_waiting": {\n                        "journey": 18,\n                        "wait": 0,\n                        "transfers": 0,\n                    },\n                    "fewest_transfers": {\n                        "journey": 18,\n                        "wait": 0,\n                        "transfers": 0,\n                    },\n                    "simple": {\n                        "journey": 16,\n                        "wait": 1,\n                        "transfers": 1,\n                    },\n                    "balanced": {\n                        "journey": 18,\n                        "wait": 0,\n                        "transfers": 0,\n                    },\n                },\n            },\n            indent=2,\n        )\n        + "\\n",\n        encoding="utf-8",\n    )\n\n    prefix = (\n        str(ROOT / "envs")\n        + str(Path("/"))\n    )\n\n    save_png(\n        env,\n        STEM,\n        prefix,\n    )\n\n\ndef main():\n    args = parse_args()\n\n    validate_geometry()\n\n    if (\n        OUT_PKL.exists()\n        and not args.overwrite\n    ):\n        raise RuntimeError(\n            "E5 exists. Use --overwrite "\n            "to intentionally rebuild."\n        )\n\n    print(\n        "Building frozen validated E5..."\n    )\n\n    print(\n        "  movement steps:",\n        STEPS,\n    )\n\n    print(\n        "  route turns:",\n        TURNS,\n    )\n\n    env = build_environment()\n\n    env_lp_text = convert_to_clingo(\n        env\n    )\n\n    scenario = scenario_text()\n\n    save_outputs(\n        env,\n        env_lp_text,\n        scenario,\n    )\n\n    print()\n    print(\n        "E5 BUILD: PASS"\n    )\n\n    print(\n        "  No Clingo optimization was run during building."\n    )\n\n    print(\n        "  Run profile optimization only in the final evaluation."\n    )\n\n    print(\n        "  PNG:",\n        OUT_PNG.relative_to(ROOT),\n    )\n\n\nif __name__ == "__main__":\n    try:\n        main()\n\n    except Exception as exc:\n        print(\n            "ERROR:",\n            exc,\n            file=sys.stderr,\n        )\n\n        raise SystemExit(1)\n'
+
+compile(
+    BUILDER,
+    str(TARGET),
+    "exec",
+)
+
+TARGET.write_text(
+    BUILDER,
+    encoding="utf-8",
+)
+
+print()
+print(
+    "E5 FINAL VALIDATED RESTORE: INSTALLED"
+)
+
+print(
+    "Target:",
+    TARGET.relative_to(ROOT),
+)
+
+print()
+print(
+    "Now run:"
+)
+
+print(
+    r"  python tools\final_evaluation\build_e5_mixed_preferences.py --overwrite"
+)

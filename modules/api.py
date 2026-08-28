@@ -15,6 +15,7 @@ class FlatlandPlan(Application):
         self.env = env
         self.actions = actions
         self.action_list = None
+        self.model_symbols = None  # RS42_STEP1_BACKEND_VALIDATION
 
     def main(self, ctl, files):
         # add encodings
@@ -40,6 +41,12 @@ class FlatlandPlan(Application):
         with ctl.solve(yield_=True) as handle:
             for model in handle:
                 models.append(model.symbols(atoms=True))
+
+        if not models:
+            raise RuntimeError("Clingo returned no model.")
+
+        # Keep the optimum answer set for execution validation.
+        self.model_symbols = models[-1]
 
         # capture output actions for renderer
         #return(build_action_list(models))

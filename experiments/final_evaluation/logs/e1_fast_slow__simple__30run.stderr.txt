@@ -1,0 +1,12 @@
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:43:5-30: info: atom does not occur in any rule head:
+  transfer_station(Station)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:44:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train1,Order1)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\asp\custom\passenger_transfer.lp:45:5-34: info: atom does not occur in any rule head:
+  uses_train(P,Train2,Order2)
+
+C:\Users\priya\OneDrive\Desktop\CogSys\Railway Scheduling\rs42\experiments\final_evaluation\configs\runtime\metric_collector_30run.lp:12:1-19: info: no atoms over signature occur in program:
+  wait_time/2
+

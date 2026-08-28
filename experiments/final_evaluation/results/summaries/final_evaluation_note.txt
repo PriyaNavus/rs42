@@ -1,0 +1,25 @@
+RS42 FINAL EVALUATION
+
+FINAL STATUS: PASS_WITH_LIMITATION
+
+Required passenger-preference evaluation
+----------------------------------------
+E1-E5 optimization: 25/25 OPTIMUM FOUND
+Controlled semantic checks: 10/10 PASS
+ASP -> Flatland validation: 6/6 PASS
+
+E6 infrastructure robustness
+----------------------------
+Supplementary profile stress runs: 4/5 OPTIMUM FOUND
+Less Waiting: TIMEOUT
+
+LIMITATION
+----------
+E6 Less Waiting did not prove optimality within 1200 seconds. E6 is an infrastructure-robustness environment and intentionally has no passenger OD / transfer-wait structure. Therefore this profile is treated as a supplementary solver stress test, not as a required passenger-preference validation.
+
+The timeout is retained in all_runs.csv and is not rewritten as an optimum.
+
+FINAL INTERPRETATION
+--------------------
+The required evaluation passes. Report the result as PASS WITH LIMITATION,
+not as 30/30 OPTIMUM FOUND.

@@ -1,4 +1,20 @@
-% RS42 E2 - Curved Transfer Network
+% RS42 E2 - Passenger-aware transfer network
+%
+% Demonstrates minimum transfer time = 6.
+%
+% Direct option:
+%   Train 0: origin 2 -> destination 26
+%   journey time = 24, transfers = 0
+%
+% Transfer option:
+%   Train 1: origin 2 -> station_b 9
+%   Train 2: station_b 15 -> destination 22
+%   transfer time = 15 - 9 = 6
+%   journey time = 22 - 2 = 20, transfers = 1
+%
+% Expected preference separation:
+%   Fastest          -> Train 1 -> Train 2
+%   Fewer Transfers  -> Train 0
 
 flatland_waypoint(0,wp_direct_origin,2,1).
 flatland_waypoint(0,wp_direct_destination,5,16).
@@ -17,12 +33,12 @@ must_visit(1,station_b).
 station_order(1,origin,station_b).
 
 flatland_waypoint(2,wp_t2_b,9,8).
-flatland_waypoint(2,wp_t2_c,10,12).
+flatland_waypoint(2,wp_t2_destination,10,12).
 station(station_b,2,wp_t2_b).
-station(station_c,2,wp_t2_c).
+station(destination,2,wp_t2_destination).
 must_visit(2,station_b).
-must_visit(2,station_c).
-station_order(2,station_b,station_c).
+must_visit(2,destination).
+station_order(2,station_b,destination).
 
 flatland_waypoint(3,wp_t3_c,9,15).
 flatland_waypoint(3,wp_t3_destination,10,19).
@@ -36,15 +52,14 @@ passenger(p1).
 passenger_origin(p1,origin).
 passenger_destination(p1,destination).
 
-% Final E2 timetable using the actual route lengths.
-% Direct:   2 -> 26 = journey 24
-% Transfer: 2 -> 9, 10 -> 17, 18 -> 25 = journey 23, wait 2
 :- first_station_visit(0,origin,T), T != 2.
 :- first_station_visit(0,destination,T), T != 26.
 
 :- first_station_visit(1,origin,T), T != 2.
 :- first_station_visit(1,station_b,T), T != 9.
-:- first_station_visit(2,station_b,T), T != 10.
-:- first_station_visit(2,station_c,T), T != 17.
+
+:- first_station_visit(2,station_b,T), T != 15.
+:- first_station_visit(2,destination,T), T != 22.
+
 :- first_station_visit(3,station_c,T), T != 18.
 :- first_station_visit(3,destination,T), T != 25.

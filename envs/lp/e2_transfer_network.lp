@@ -7,7 +7,7 @@ train(0). start(0,(2,1),0,e). end(0,(5,16),26). speed(0,1).
 
 train(1). start(1,(9,1),0,e). end(1,(10,5),9). speed(1,1).
 
-train(2). start(2,(9,8),8,e). end(2,(10,12),17). speed(2,1).
+train(2). start(2,(9,8),13,e). end(2,(10,12),22). speed(2,1).
 
 train(3). start(3,(9,15),16,e). end(3,(10,19),25). speed(3,1).
 

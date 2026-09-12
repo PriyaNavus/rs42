@@ -14,7 +14,7 @@
 % ============================================================
 
 #const max_passenger_legs = 3.
-#const min_transfer_time = 1.
+#const min_transfer_time = 6.
 
 % ------------------------------------------------------------
 % Common station-service relation
@@ -105,7 +105,7 @@ ride_option(Train, FromStation, ToStation, Depart, Arrive) :-
    J = I + 1,
    TransferStation != NextStation.
 
-% A transfer must be temporally feasible.
+% A transfer must provide at least min_transfer_time time units between arrival and the next departure.
 :- chosen_leg(P,I,_,_,TransferStation,_,Arrive),
    chosen_leg(P,J,_,TransferStation,_,Depart,_),
    J = I + 1,

@@ -243,14 +243,14 @@ ENCODINGS = [
 WEIGHTS = ["w_arrival", "w_wait", "w_transfer", "w_turn", "w_waypoint"]
 WEIGHT_LABELS = {
     "w_arrival": "Early arrival",
-    "w_wait": "Less waiting",
+    "w_wait": "Transfer timing (ideal: 6 steps)",
     "w_transfer": "Fewer transfers",
     "w_turn": "Simpler route",
     "w_waypoint": "Earlier intermediate stops",
 }
 PROFILE_LABELS = {
     "fastest": "Fastest",
-    "least_waiting": "Less waiting",
+    "least_waiting": "Less Waiting (ideal transfer: 6 steps)",
     "fewest_transfers": "Fewer transfers",
     "comfort": "Simple journey",
     "balanced": "Balanced",
@@ -266,7 +266,7 @@ OBJECTIVE_MODE_BY_PROFILE = {
 
 OBJECTIVE_DESCRIPTION = {
     "fastest": "Journey duration first; other metrics break ties.",
-    "least_waiting": "In-journey waiting first; other metrics break ties.",
+    "least_waiting": "Transfer-time deviation from the 6-step ideal first; other metrics break ties.",
     "fewest_transfers": "Passenger transfers first; other metrics break ties.",
     "simple": "Route turns first; other metrics break ties.",
     "weighted": "Weighted multi-objective optimization.",
@@ -879,7 +879,7 @@ with experiments_tab:
 
     friendly_profile = {
         "fastest": "Fastest",
-        "least_waiting": "Less Waiting",
+        "least_waiting": "Less Waiting (ideal transfer: 6 steps)",
         "fewest_transfers": "Fewer Transfers",
         "simple": "Simple Journey",
         "comfort": "Simple Journey",

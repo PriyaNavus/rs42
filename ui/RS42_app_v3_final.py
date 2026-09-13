@@ -48,7 +48,7 @@ PROFILE_FILES = {
 
 PROFILE_LABELS = {
     "fastest": "Fastest",
-    "least_waiting": "Less Waiting",
+    "least_waiting": "Less Waiting (ideal transfer: 6 steps)",
     "fewest_transfers": "Fewer Transfers",
     "simple": "Simple Journey",
     "balanced": "Balanced",
@@ -56,7 +56,7 @@ PROFILE_LABELS = {
 
 PROFILE_DESCRIPTIONS = {
     "fastest": "Prioritizes the shortest passenger journey time.",
-    "least_waiting": "Prioritizes reducing connection waiting during the passenger journey.",
+    "least_waiting": "Prioritizes connection times closest to the 6-step transfer ideal.",
     "fewest_transfers": "Prioritizes using fewer train changes, even if the journey becomes longer.",
     "simple": "Prioritizes a route with fewer turns / lower route complexity.",
     "balanced": "Uses the project's weighted multi-objective policy to balance time, waiting, transfers and route simplicity.",
@@ -105,7 +105,7 @@ SCENARIO_QUESTIONS = {
 WEIGHTS = ["w_arrival", "w_wait", "w_transfer", "w_turn"]
 WEIGHT_LABELS = {
     "w_arrival": "Journey / arrival",
-    "w_wait": "Waiting",
+    "w_wait": "Transfer timing (ideal: 6 steps)",
     "w_transfer": "Transfers",
     "w_turn": "Route simplicity",
 }

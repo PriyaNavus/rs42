@@ -14,7 +14,7 @@
 % ============================================================
 
 #const max_passenger_legs = 3.
-#const min_transfer_time = 6.
+#const ideal_transfer_time = 6.
 
 % ------------------------------------------------------------
 % Common station-service relation
@@ -109,7 +109,7 @@ ride_option(Train, FromStation, ToStation, Depart, Arrive) :-
 :- chosen_leg(P,I,_,_,TransferStation,_,Arrive),
    chosen_leg(P,J,_,TransferStation,_,Depart,_),
    J = I + 1,
-   Depart < Arrive + min_transfer_time.
+   Depart < Arrive.
 
 % Consecutive legs on the same train are redundant: they can be
 % represented as one longer ride on that train.
@@ -145,6 +145,25 @@ transfer_wait(P,I,Wait) :-
     chosen_transfer(P,I,_,_,_,Arrive,Depart),
     Wait = Depart - Arrive.
 
+% Soft passenger preference: a transfer is most comfortable at
+% ideal_transfer_time (= 6) time units. Shorter and longer connections
+% remain feasible but are penalized by their absolute deviation from 6.
+transfer_deviation(P,I,Deviation) :-
+    transfer_wait(P,I,Wait),
+    Wait < ideal_transfer_time,
+    Deviation = ideal_transfer_time - Wait.
+
+transfer_deviation(P,I,Deviation) :-
+    transfer_wait(P,I,Wait),
+    Wait >= ideal_transfer_time,
+    Deviation = Wait - ideal_transfer_time.
+
+passenger_transfer_deviation(P,Total) :-
+    od_passenger(P),
+    Total = #sum {
+        Deviation,I : transfer_deviation(P,I,Deviation)
+    }.
+
 passenger_transfer_wait(P,Total) :-
     od_passenger(P),
     Total = #sum {
@@ -161,4 +180,5 @@ passenger_uses_train(P,Train) :-
 #show journey_length/2.
 #show passenger_journey_time/2.
 #show passenger_transfer_wait/2.
+#show passenger_transfer_deviation/2.
 #show transfer_count/2.

@@ -5,7 +5,7 @@ global(30).
 
 train(0). start(0,(2,1),0,e). end(0,(3,6),10). speed(0,1).
 
-train(1). start(1,(2,10),12,e). end(1,(3,15),22). speed(1,1).
+train(1). start(1,(2,10),14,e). end(1,(3,15),24). speed(1,1).
 
 train(2). start(2,(8,1),0,e). end(2,(9,8),12). speed(2,1).
 

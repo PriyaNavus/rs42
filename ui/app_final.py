@@ -173,7 +173,7 @@ PROFILE_FILES = {
 
 PROFILE_LABELS = {
     "fastest": "Fastest",
-    "least_waiting": "Less Waiting",
+    "least_waiting": "Less Waiting (ideal transfer: 6 steps)",
     "fewest_transfers": "Fewer Transfers",
     "simple": "Simple Journey",
     "balanced": "Balanced",
@@ -185,7 +185,7 @@ PROFILE_DESCRIPTIONS = {
         "Prioritises reaching the destination as early as possible."
     ),
     "least_waiting": (
-        "Prioritises shorter connection waiting between services."
+        "Prioritises connection times closest to the 6-step transfer ideal."
     ),
     "fewest_transfers": (
         "Prioritises staying on fewer trains."
@@ -209,7 +209,7 @@ WEIGHTS = [
 
 WEIGHT_LABELS = {
     "w_arrival": "Travel time",
-    "w_wait": "Waiting",
+    "w_wait": "Transfer timing (ideal: 6 steps)",
     "w_transfer": "Transfers",
     "w_turn": "Route simplicity",
 }
@@ -1423,7 +1423,7 @@ elif page == "Compare Preferences":
                     "comfort": "Simple Journey",
                     "simple": "Simple Journey",
                     "fastest": "Fastest",
-                    "least_waiting": "Less Waiting",
+                    "least_waiting": "Less Waiting (ideal transfer: 6 steps)",
                     "fewest_transfers": "Fewer Transfers",
                     "balanced": "Balanced",
                 }

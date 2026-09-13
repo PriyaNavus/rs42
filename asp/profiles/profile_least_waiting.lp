@@ -1,4 +1,4 @@
-% Primary optimization: minimum in-journey waiting
+% Primary optimization: transfer timing closest to the 6-step ideal
 objective_mode(least_waiting).
 
 #const w_arrival = 6.

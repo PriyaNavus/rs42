@@ -106,12 +106,13 @@ journey_metric(train(ID),T) :-
     travel_time(ID,T),
     not has_od_passenger.
 
-% Least waiting:
-% - with OD passengers: waiting between selected train legs
+% Transfer timing preference:
+% - with OD passengers: absolute deviation of each connection from the
+%   preferred 6-step transfer time
 % - otherwise: train operational in-journey waiting
 waiting_metric(passenger(P),T) :-
     od_passenger(P),
-    passenger_transfer_wait(P,T).
+    passenger_transfer_deviation(P,T).
 
 waiting_metric(train(ID),T) :-
     waiting_time(ID,T),

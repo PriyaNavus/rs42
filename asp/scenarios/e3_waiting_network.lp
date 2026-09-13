@@ -1,4 +1,22 @@
-% RS42 E3 - Curved Waiting Network
+% RS42 E3 - Transfer Timing Preference
+%
+% Route A: slightly slower but ideal transfer
+%   Train 0: origin 2 -> station_b 10
+%   Train 1: station_b 16 -> destination 24
+%   passenger journey = 22
+%   transfer wait = 6
+%   deviation from ideal 6 = 0
+%
+% Route B: faster but tight transfer
+%   Train 2: origin 2 -> station_c 12
+%   Train 3: station_c 13 -> destination 23
+%   passenger journey = 21
+%   transfer wait = 1
+%   deviation from ideal 6 = 5
+%
+% Expected profile separation:
+%   Fastest -> Route B
+%   Less Waiting (ideal transfer: 6 steps) -> Route A
 
 flatland_waypoint(0,wp_a1_origin,2,1).
 flatland_waypoint(0,wp_a1_b,3,6).
@@ -36,11 +54,11 @@ passenger(p1).
 passenger_origin(p1,origin).
 passenger_destination(p1,destination).
 
-% Fixed service timetable for the longer E3.
+% Fixed service timetable.
 :- first_station_visit(0,origin,T), T != 2.
 :- first_station_visit(0,station_b,T), T != 10.
-:- first_station_visit(1,station_b,T), T != 14.
-:- first_station_visit(1,destination,T), T != 22.
+:- first_station_visit(1,station_b,T), T != 16.
+:- first_station_visit(1,destination,T), T != 24.
 
 :- first_station_visit(2,origin,T), T != 2.
 :- first_station_visit(2,station_c,T), T != 12.

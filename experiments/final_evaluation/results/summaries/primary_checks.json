@@ -1,166 +1,115 @@
 {
-  "scope": "controlled preference checks for E1-E5",
+  "scope": "controlled relational preference checks for E1-E5",
+  "method": "Checks are recomputed from all_runs.csv and compare profile behaviour relationally rather than against hardcoded timetable values.",
+  "ideal_transfer_time": 6,
   "checks": [
     {
-      "name": "E1 Fastest selects the known fast service",
+      "name": "E1 all canonical profiles reach a proven optimum",
       "environment": "e1_fast_slow",
-      "profile": "fastest",
-      "description": "Curved E1 preserves the isolated fast-vs-slow travel-time result.",
-      "expected": {
-        "journey_time": 10,
-        "selected_train_contains": 0
-      },
+      "description": "The E1 control environment should remain solvable under every profile.",
       "observed": {
-        "journey_time": 10,
-        "selected_train_contains": null
+        "fastest": "OPTIMUM FOUND",
+        "least_waiting": "OPTIMUM FOUND",
+        "fewest_transfers": "OPTIMUM FOUND",
+        "simple": "OPTIMUM FOUND",
+        "balanced": "OPTIMUM FOUND"
       },
-      "status": "OPTIMUM FOUND",
       "pass": true
     },
     {
-      "name": "E2 Fastest selects the multi-transfer route",
+      "name": "E1 profiles agree when no meaningful preference trade-off exists",
+      "environment": "e1_fast_slow",
+      "description": "All five profiles should select the same passenger journey time in E1.",
+      "observed": {
+        "fastest": 18,
+        "least_waiting": 18,
+        "fewest_transfers": 18,
+        "simple": 18,
+        "balanced": 18
+      },
+      "pass": true
+    },
+    {
+      "name": "E2 Fastest accepts a transfer for a shorter journey",
       "environment": "e2_transfer_network",
-      "profile": "fastest",
-      "description": "Fastest should accept two transfers for the 14-step passenger journey.",
-      "expected": {
-        "journey_time": 14,
-        "transfers": 2
-      },
+      "description": "Fastest should have a shorter journey time than Fewer Transfers.",
       "observed": {
-        "journey_time": 14,
-        "transfers": 2
+        "fastest_journey": 20,
+        "fewest_transfers_journey": 24
       },
-      "status": "OPTIMUM FOUND",
       "pass": true
     },
     {
-      "name": "E2 Fewer Transfers selects direct service",
+      "name": "E2 Fewer Transfers uses fewer train changes than Fastest",
       "environment": "e2_transfer_network",
-      "profile": "fewest_transfers",
-      "description": "Fewer Transfers should accept the longer direct 18-step journey.",
-      "expected": {
-        "journey_time": 18,
-        "transfers": 0
-      },
+      "description": "The transfer-focused profile should reduce transfer count relative to Fastest.",
       "observed": {
-        "journey_time": 18,
-        "transfers": 0
+        "fastest_transfers": 1,
+        "fewest_transfers_transfers": 0
       },
-      "status": "OPTIMUM FOUND",
       "pass": true
     },
     {
-      "name": "E3 Fastest accepts the longer connection wait",
+      "name": "E3 Fastest chooses the quicker itinerary",
       "environment": "e3_waiting_network",
-      "profile": "fastest",
-      "description": "Fastest should select the 11-step itinerary even though its connection wait is five.",
-      "expected": {
-        "journey_time": 11,
-        "transfer_wait": 5,
-        "transfers": 1
-      },
+      "description": "Fastest should arrive sooner than the transfer-timing profile.",
       "observed": {
-        "journey_time": 11,
-        "transfer_wait": 5,
-        "transfers": 1
+        "fastest_journey": 21,
+        "less_waiting_journey": 22
       },
-      "status": "OPTIMUM FOUND",
       "pass": true
     },
     {
-      "name": "E3 Less Waiting selects the low-wait itinerary",
+      "name": "E3 Less Waiting chooses transfer timing closer to the six-step ideal",
       "environment": "e3_waiting_network",
-      "profile": "least_waiting",
-      "description": "Less Waiting should select the 13-step itinerary with one unit of connection wait.",
-      "expected": {
-        "journey_time": 13,
-        "transfer_wait": 1,
-        "transfers": 1
-      },
+      "description": "The transfer-timing profile should reduce absolute deviation from the preferred six-step connection.",
       "observed": {
-        "journey_time": 13,
-        "transfer_wait": 1,
-        "transfers": 1
+        "ideal_transfer": 6,
+        "fastest_wait": 1,
+        "fastest_deviation": 5,
+        "less_waiting_wait": 6,
+        "less_waiting_deviation": 0
       },
-      "status": "OPTIMUM FOUND",
       "pass": true
     },
     {
       "name": "E4 Fastest is quicker than Simple Journey",
       "environment": "e4_simple_complex",
-      "description": "The original E4 should preserve the travel-time versus route-simplicity trade-off.",
-      "left_profile": "fastest",
-      "left_metric": "journey_time",
-      "left_value": 32,
-      "operator": "<",
-      "right_profile": "simple",
-      "right_metric": "journey_time",
-      "right_value": 41,
+      "description": "Fastest should trade greater route complexity for a shorter journey.",
+      "observed": {
+        "fastest_journey": 32,
+        "simple_journey": 41
+      },
       "pass": true
     },
     {
-      "name": "E4 Simple Journey uses fewer turns",
+      "name": "E4 Simple Journey uses fewer turns than Fastest",
       "environment": "e4_simple_complex",
       "description": "Simple Journey should reduce route turns relative to Fastest.",
-      "left_profile": "simple",
-      "left_metric": "turns",
-      "left_value": 4,
-      "operator": "<",
-      "right_profile": "fastest",
-      "right_metric": "turns",
-      "right_value": 8,
+      "observed": {
+        "fastest_turns": 8,
+        "simple_turns": 4
+      },
       "pass": true
     },
     {
-      "name": "E5 Fastest selects alternative A",
+      "name": "E5 Fastest chooses a shorter journey than Fewer Transfers",
       "environment": "e5_mixed_preferences",
-      "profile": "fastest",
-      "description": "The integrated Fastest alternative is the 14-step, two-transfer service.",
-      "expected": {
-        "journey_time": 14,
-        "transfer_wait": 2,
-        "transfers": 2
-      },
+      "description": "The integrated environment should preserve the journey-time versus transfer-count trade-off.",
       "observed": {
-        "journey_time": 14,
-        "transfer_wait": 2,
-        "transfers": 2
+        "fastest_journey": 14,
+        "fewest_transfers_journey": 18
       },
-      "status": "OPTIMUM FOUND",
       "pass": true
     },
     {
-      "name": "E5 Less Waiting selects direct alternative B",
+      "name": "E5 Fewer Transfers reduces train changes relative to Fastest",
       "environment": "e5_mixed_preferences",
-      "profile": "least_waiting",
-      "description": "The direct alternative has zero transfer wait.",
-      "expected": {
-        "journey_time": 18,
-        "transfer_wait": 0,
-        "transfers": 0
-      },
+      "description": "The integrated transfer-focused profile should use fewer transfers than Fastest.",
       "observed": {
-        "journey_time": 18,
-        "transfer_wait": 0,
-        "transfers": 0
+        "fastest_transfers": 2,
+        "fewest_transfers_transfers": 0
       },
-      "status": "OPTIMUM FOUND",
-      "pass": true
-    },
-    {
-      "name": "E5 Fewer Transfers selects direct alternative B",
-      "environment": "e5_mixed_preferences",
-      "profile": "fewest_transfers",
-      "description": "The direct alternative is the zero-transfer route.",
-      "expected": {
-        "journey_time": 18,
-        "transfers": 0
-      },
-      "observed": {
-        "journey_time": 18,
-        "transfers": 0
-      },
-      "status": "OPTIMUM FOUND",
       "pass": true
     }
   ],

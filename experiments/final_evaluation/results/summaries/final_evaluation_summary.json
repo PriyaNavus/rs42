@@ -24,23 +24,23 @@
     "profile_results": {
       "fastest": {
         "status": "OPTIMUM FOUND",
-        "runtime_seconds": "5.016"
+        "runtime_seconds": "4.476"
       },
       "least_waiting": {
         "status": "TIMEOUT",
-        "runtime_seconds": "1200.031"
+        "runtime_seconds": "300.037"
       },
       "fewest_transfers": {
         "status": "OPTIMUM FOUND",
-        "runtime_seconds": "4.695"
+        "runtime_seconds": "4.193"
       },
       "simple": {
         "status": "OPTIMUM FOUND",
-        "runtime_seconds": "350.709"
+        "runtime_seconds": "255.135"
       },
       "balanced": {
         "status": "OPTIMUM FOUND",
-        "runtime_seconds": "8.525"
+        "runtime_seconds": "7.033"
       }
     },
     "limitation": "E6 Less Waiting did not prove optimality within 1200 seconds. E6 is an infrastructure-robustness environment and intentionally has no passenger OD / transfer-wait structure. Therefore this profile is treated as a supplementary solver stress test, not as a required passenger-preference validation."

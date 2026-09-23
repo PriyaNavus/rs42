@@ -13,8 +13,8 @@ Models       : 2
   Optimum    : yes
 Optimization : 512
 Calls        : 1
-Time         : 8.674s (Solving: 4.65s 1st Model: 0.14s Unsat: 3.98s)
-CPU Time     : 8.625s
+Time         : 7.739s (Solving: 3.56s 1st Model: 0.14s Unsat: 2.93s)
+CPU Time     : 7.578s
 RS42_VALIDATION: PASS - ASP plan matched Flatland and all trains reached their targets.
 asp/custom/passenger_transfer.lp:31:5-17: info: atom does not occur in any rule head:
   passenger(P)

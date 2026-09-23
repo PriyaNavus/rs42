@@ -28,7 +28,7 @@
       },
       "least_waiting": {
         "status": "TIMEOUT",
-        "runtime_seconds": "300.037"
+        "runtime_seconds": "1200.02"
       },
       "fewest_transfers": {
         "status": "OPTIMUM FOUND",
@@ -36,7 +36,7 @@
       },
       "simple": {
         "status": "OPTIMUM FOUND",
-        "runtime_seconds": "255.135"
+        "runtime_seconds": "221.399"
       },
       "balanced": {
         "status": "OPTIMUM FOUND",

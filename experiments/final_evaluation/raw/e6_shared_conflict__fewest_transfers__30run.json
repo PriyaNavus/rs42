@@ -61,10 +61,10 @@
   },
   "Calls": 1,
   "Time": {
-    "Total": 4.401,
-    "Solve": 0.669,
-    "Model": 0.156,
-    "Unsat": 0.034,
-    "CPU": 4.234
+    "Total": 3.939,
+    "Solve": 0.501,
+    "Model": 0.112,
+    "Unsat": 0.016,
+    "CPU": 3.938
   }
 }

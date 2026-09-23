@@ -8,10 +8,10 @@
       "Witnesses": [
         {
           "Value": [
-            "visited_station(0,origin)", "visited_station(1,origin)", "action(train(0),wait,0)", "action(train(1),wait,0)", "action(train(0),move_forward,1)", "action(train(1),move_forward,1)", "first_station_visit(0,origin,2)", "first_station_visit(1,origin,2)", "passenger_transfer_wait(p1,0)", "transfer_count(p1,0)", "first_station_visit(0,destination,12)", "first_station_visit(1,destination,20)", "journey_length(p1,1)", "chosen_leg(p1,1,0,origin,destination,2,12)", "passenger_journey_time(p1,10)", "travel_time(0,10)", "travel_time(1,18)", "waiting_time(0,0)", "waiting_time(1,0)", "passenger_uses_train(p1,0)", "action(train(0),move_right,6)", "action(train(1),move_right,8)", "action(train(0),move_left,8)", "action(train(1),move_left,12)", "turns(0,2)", "turns(1,2)", "waypoint_time(0,14)", "waypoint_time(1,22)", "visited_station(0,destination)", "visited_station(1,destination)", "action(train(0),move_forward,2)", "action(train(1),move_forward,2)", "action(train(1),move_forward,3)", "action(train(0),move_forward,3)", "action(train(0),move_forward,4)", "action(train(1),move_forward,4)", "action(train(1),move_forward,5)", "action(train(0),move_forward,5)", "action(train(1),move_forward,6)", "action(train(1),move_forward,7)", "action(train(0),move_forward,7)", "action(train(1),move_forward,9)", "action(train(0),move_forward,9)", "action(train(0),move_forward,10)", "action(train(1),move_forward,10)", "action(train(1),move_forward,11)", "action(train(0),move_forward,11)", "action(train(1),move_forward,13)", "action(train(1),move_forward,14)", "action(train(1),move_forward,15)", "action(train(1),move_forward,16)", "action(train(1),move_forward,17)", "action(train(1),move_forward,18)", "action(train(1),move_forward,19)"
+            "visited_station(0,origin)", "visited_station(1,origin)", "action(train(0),wait,0)", "action(train(1),wait,0)", "action(train(0),move_forward,1)", "action(train(1),move_forward,1)", "first_station_visit(0,origin,2)", "first_station_visit(1,origin,2)", "passenger_transfer_deviation(p1,0)", "transfer_count(p1,0)", "passenger_transfer_wait(p1,0)", "first_station_visit(0,destination,20)", "first_station_visit(1,destination,28)", "journey_length(p1,1)", "chosen_leg(p1,1,0,origin,destination,2,20)", "passenger_journey_time(p1,18)", "travel_time(0,18)", "travel_time(1,26)", "waiting_time(0,0)", "waiting_time(1,0)", "passenger_uses_train(p1,0)", "action(train(0),move_right,5)", "action(train(1),move_right,7)", "action(train(0),move_right,12)", "action(train(0),move_right,15)", "action(train(1),move_right,17)", "action(train(1),move_right,21)", "action(train(0),move_left,7)", "action(train(0),move_left,10)", "action(train(1),move_left,10)", "action(train(1),move_left,14)", "action(train(0),move_left,17)", "action(train(1),move_left,24)", "turns(0,6)", "turns(1,6)", "waypoint_time(0,22)", "waypoint_time(1,30)", "visited_station(0,destination)", "visited_station(1,destination)", "action(train(0),move_forward,11)", "action(train(0),move_forward,13)", "action(train(0),move_forward,14)", "action(train(1),move_forward,15)", "action(train(0),move_forward,16)", "action(train(1),move_forward,16)", "action(train(0),move_forward,18)", "action(train(1),move_forward,18)", "action(train(1),move_forward,19)", "action(train(0),move_forward,19)", "action(train(1),move_forward,20)", "action(train(1),move_forward,22)", "action(train(1),move_forward,23)", "action(train(1),move_forward,25)", "action(train(1),move_forward,26)", "action(train(1),move_forward,27)", "action(train(0),move_forward,2)", "action(train(1),move_forward,2)", "action(train(1),move_forward,3)", "action(train(0),move_forward,3)", "action(train(0),move_forward,4)", "action(train(1),move_forward,4)", "action(train(1),move_forward,5)", "action(train(0),move_forward,6)", "action(train(1),move_forward,6)", "action(train(0),move_forward,8)", "action(train(1),move_forward,8)", "action(train(1),move_forward,9)", "action(train(0),move_forward,9)", "action(train(1),move_forward,11)", "action(train(1),move_forward,12)", "action(train(1),move_forward,13)"
           ],
           "Costs": [
-            0, 10, 0, 2, 36
+            0, 18, 0, 6, 52
           ]
         }
       ]
@@ -24,15 +24,15 @@
     "Optimum": "yes",
     "Optimal": 1,
     "Costs": [
-      0, 10, 0, 2, 36
+      0, 18, 0, 6, 52
     ]
   },
   "Calls": 1,
   "Time": {
-    "Total": 7.911,
-    "Solve": 0.087,
-    "Model": 0.009,
-    "Unsat": 0.077,
-    "CPU": 7.172
+    "Total": 9.653,
+    "Solve": 0.614,
+    "Model": 0.016,
+    "Unsat": 0.599,
+    "CPU": 9.516
   }
 }

@@ -13,7 +13,7 @@
   "expected_flatland_validation_total": 6,
   "flatland_validation_skipped": false,
   "overall_status": "PASS_WITH_LIMITATION",
-  "previous_results_archive": "experiments\\final_evaluation\\_archive\\results_before_30run_20260913_215439",
+  "previous_results_archive": null,
   "final_status": "PASS_WITH_LIMITATION",
   "overall_optimum_found": 29,
   "overall_attempted_runs": 30,

@@ -7,7 +7,7 @@
       "environment": "e6_shared_conflict",
       "profile": "fastest",
       "status": "OPTIMUM FOUND",
-      "runtime_seconds": 5.016,
+      "runtime_seconds": 4.476,
       "metric_scope": "system_all_trains",
       "pass": true
     },
@@ -16,7 +16,7 @@
       "environment": "e6_shared_conflict",
       "profile": "least_waiting",
       "status": "TIMEOUT",
-      "runtime_seconds": 1200.031,
+      "runtime_seconds": 1200.02,
       "metric_scope": "system_all_trains",
       "pass": false
     },
@@ -25,7 +25,7 @@
       "environment": "e6_shared_conflict",
       "profile": "fewest_transfers",
       "status": "OPTIMUM FOUND",
-      "runtime_seconds": 4.695,
+      "runtime_seconds": 4.193,
       "metric_scope": "system_all_trains",
       "pass": true
     },
@@ -34,7 +34,7 @@
       "environment": "e6_shared_conflict",
       "profile": "simple",
       "status": "OPTIMUM FOUND",
-      "runtime_seconds": 350.709,
+      "runtime_seconds": 221.399,
       "metric_scope": "system_all_trains",
       "pass": true
     },
@@ -43,7 +43,7 @@
       "environment": "e6_shared_conflict",
       "profile": "balanced",
       "status": "OPTIMUM FOUND",
-      "runtime_seconds": 8.525,
+      "runtime_seconds": 7.033,
       "metric_scope": "system_all_trains",
       "pass": true
     }

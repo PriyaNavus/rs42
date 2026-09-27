@@ -44,10 +44,11 @@ From the repository root:
 streamlit run ui/app.py
 ```
 
-The UI lets the user pick a preference profile (fastest, least waiting, fewest transfers, balanced, comfort) or set custom weights with sliders. It writes the chosen weights to `asp/profiles/active_profile.lp`, which is loaded via `asp/params.py`, so the selection reaches the solver. Two modes are available:
+`ui/app.py` is the current Streamlit entry point. It lets the user choose one of the final environments, select Fastest, Less Waiting, Fewer Transfers, Simple Journey, Balanced, or custom weights, and run the optimization. Flatland replay validation can be enabled in the run options. The app also displays the recorded final evaluation results.
 
-- Quick check: runs clingo on the `.lp` environment and reports the optimization value, per-train metrics, and the schedule.
-- Full animation: runs `solve.py` on the `.pkl` environment and displays the resulting GIF.
+Earlier UI prototypes are retained in `ui/archive/` for reference. The separate
+`ui/RS42_app_v3_final.py` is left in place to preserve local edits; the documented
+entry point is `ui/app.py`.
 
 ### Creating environments
 
@@ -104,4 +105,6 @@ conda activate flatland
 streamlit run ui/app.py
 ```
 
-Select the `balanced` profile, the environment `env_001--2_4`, mode "full animation", and press solve. The resulting GIF shows one train briefly taking a passing loop to let the other pass — the schedule the optimizer selected under the balanced weights.
+Select E2, choose Fastest, and click **Find my journey** to inspect the transfer route. Enable **Validate in Flatland after optimization** in the run options when simulator replay is needed. The final comparison data is in `experiments/final_evaluation/results/runs/all_runs.csv`.
+
+Historical setup, fix, inspection, and installation scripts are retained under `tools/legacy_root_scripts/`. The supported root commands remain `build.py`, `solve.py`, `retry_e6_timeouts.py`, and `finalize_rs42_evaluation.py`.

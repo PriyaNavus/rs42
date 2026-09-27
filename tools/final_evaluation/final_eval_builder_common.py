@@ -138,7 +138,7 @@ def profile_path(root, profile):
         "fastest": "profile_fastest.lp",
         "least_waiting": "profile_least_waiting.lp",
         "fewest_transfers": "profile_fewest_transfers.lp",
-        "simple": "profile_comfort.lp",
+        "simple": "profile_simple_journey.lp",
         "balanced": "profile_balanced.lp",
     }
     return root / "asp" / "profiles" / mapping[profile]

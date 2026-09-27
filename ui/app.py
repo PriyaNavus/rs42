@@ -166,7 +166,7 @@ PROFILE_FILES = {
     "fastest": PROFILE_DIR / "profile_fastest.lp",
     "least_waiting": PROFILE_DIR / "profile_least_waiting.lp",
     "fewest_transfers": PROFILE_DIR / "profile_fewest_transfers.lp",
-    "simple": PROFILE_DIR / "profile_comfort.lp",
+    "simple": PROFILE_DIR / "profile_simple_journey.lp",
     "balanced": PROFILE_DIR / "profile_balanced.lp",
 }
 

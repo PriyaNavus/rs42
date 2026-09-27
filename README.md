@@ -46,6 +46,8 @@ streamlit run ui/app.py
 
 `ui/app.py` is the current Streamlit entry point. It lets the user choose one of the final environments, select Fastest, Less Waiting, Fewer Transfers, Simple Journey, Balanced, or custom weights, and run the optimization. Flatland replay validation can be enabled in the run options. The app also displays the recorded final evaluation results.
 
+The active Simple Journey profile is `asp/profiles/profile_simple_journey.lp`. The identical `profile_comfort.lp` remains for older scripts and to preserve the profile path recorded in the final evaluation manifest; the archived results were produced under that historical filename.
+
 Earlier UI prototypes are retained in `ui/archive/` for reference. The separate
 `ui/RS42_app_v3_final.py` is left in place to preserve local edits; the documented
 entry point is `ui/app.py`.

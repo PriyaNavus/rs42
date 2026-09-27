@@ -127,7 +127,7 @@ PROFILE_FILES = {
     "fastest": ROOT / "asp" / "profiles" / "profile_fastest.lp",
     "least_waiting": ROOT / "asp" / "profiles" / "profile_least_waiting.lp",
     "fewest_transfers": ROOT / "asp" / "profiles" / "profile_fewest_transfers.lp",
-    "simple": ROOT / "asp" / "profiles" / "profile_comfort.lp",
+    "simple": ROOT / "asp" / "profiles" / "profile_simple_journey.lp",
     "balanced": ROOT / "asp" / "profiles" / "profile_balanced.lp",
 }
 

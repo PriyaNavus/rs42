@@ -123,6 +123,8 @@ if completion_path.exists():
 existing.update({
     "final_status": status,
     "overall_status": status,
+    "primary_checks_passed": primary_pass,
+    "primary_checks_total": primary_total,
     "overall_optimum_found": all_optimum,
     "overall_attempted_runs": len(runs),
     "required_preference_runs_optimum_found": pref_optimum,

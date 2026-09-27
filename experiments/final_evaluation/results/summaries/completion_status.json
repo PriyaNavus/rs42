@@ -4,7 +4,7 @@
   "canonical_profiles_used": true,
   "total_runs": 30,
   "optimum_found": 29,
-  "primary_checks_passed": 5,
+  "primary_checks_passed": 10,
   "primary_checks_total": 10,
   "e6_robustness_passed": 4,
   "e6_robustness_total": 5,
